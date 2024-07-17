@@ -1,0 +1,15 @@
+1.Create a new project:
+	ng new expense-tracker
+
+2.Creating a new repository: expense-tracker.
+3.Creating a new branch: dev -- git branch dev
+4.Check out to dev branch and start developing
+5.Create a module called user: --ng g m user --routing
+6.Create login component ans register component and declare it inside user module: --  ng g c login
+7.Add routing in app.routing and user.routing, so if path: 'login' or '' it will be redirected to login component
+8.Install primeng
+9.Add the forms and styles to login component template
+10.Create user service and define login methods
+11.Create a home module and component to handle routing when logged in.
+12.Create a route guard to allow user to see home when they are logged in only.
+13.Things like api url, validations, html label and so on should be in config
