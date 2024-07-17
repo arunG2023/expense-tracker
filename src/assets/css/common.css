@@ -1,0 +1,22 @@
+
+.t2{
+    color: #6b7280;
+    font-size: 25px;
+    text-align: center;
+}
+
+.link{
+    color: blueviolet;
+    cursor: pointer;
+}
+
+.link:hover{
+    text-decoration: none;
+}
+
+.input-error{
+    color: red;
+    font-size: 12px;
+    margin-left: 4px;
+    position: absolute;
+}

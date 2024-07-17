@@ -1,0 +1,6 @@
+user module:
+    - login component
+    - register component
+
+home module:
+    - home component

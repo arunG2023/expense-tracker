@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Login } from '../interfaces/login';
+import { Login, RegisterUser } from '../interfaces/interface';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { apiUrl } from '../config/api-url-config';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class UserService {
   ){}
 
   public loginUser(loginData: Login): Observable<any>{
-    return this._http.post('http://localhost:4010/login',loginData)
+    return this._http.post(apiUrl.LOGIN,loginData)
   }
 
   public storeAccessToken(token: string): void{
@@ -24,6 +25,10 @@ export class UserService {
 
   public isLoggedIn(): Boolean{
     return Boolean(localStorage.getItem('Token'));
+  }
+
+  public createUser(userData: RegisterUser): Observable<any> {
+    return this._http.post(apiUrl.REGISTER, userData);
   }
 
   public logOutUser(): void {

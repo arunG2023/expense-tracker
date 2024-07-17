@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { routesConfig } from './core/config/routes-config';
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: routesConfig.USER,
     loadChildren: () => import('../app/user/user.module').then(module => module.UserModule)
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: routesConfig.USER,
     pathMatch: 'full'
   },
   {
-    path: 'home',
+    path: routesConfig.HOME,
     loadChildren: () => import('../app/home/home.module').then(module => module.HomeModule)
   }
 ];
