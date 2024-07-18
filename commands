@@ -1,5 +1,7 @@
-1.New Project   - ng new <project-name>
-2.New module    - ng g m <module-name> --routing   (falg to create oruting file) 
-3.New component - ng g c <component-name>
-3.New guard     - ng g g <guard-name>
-4.New service   - ng g s <service-name>
+1.New Project           - ng new <project-name>
+2.New module            - ng g m <module-name> --routing   (falg to create oruting file) 
+3.New component         - ng g c <component-name>
+3.New guard             - ng g g <guard-name>
+4.New service           - ng g s <service-name>
+5.New Standalone 
+  component             - ng g c <component-name> --standalone

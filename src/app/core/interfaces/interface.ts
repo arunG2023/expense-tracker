@@ -11,3 +11,10 @@ export interface RegisterUser {
     phone: number,
     password: string
 }
+
+
+export interface SnackBar {
+    message: string;
+    type: string;
+    time: number;
+}
