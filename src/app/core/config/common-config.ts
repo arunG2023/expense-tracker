@@ -56,3 +56,15 @@ export const htmlLabel = {
         ENTER_ADDRESS: "Enter Address",
     }
 }
+
+
+export const snackBar = {
+    TYPE: {
+        SUCCESS: "success",
+        ERROR: "error"
+    },
+    TIME: {
+        MIN: 2000,
+        MAX: 10000
+    }
+}

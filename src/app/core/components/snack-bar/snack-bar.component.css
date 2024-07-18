@@ -1,0 +1,22 @@
+.snack-bar {
+    position: absolute;
+    top:20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.snack-bar > div {
+    padding: 10px 10px;
+    border-radius: 5px;
+    max-width: 50%;
+}
+
+.success {
+    background-color: rgba(63, 192, 63, 0.906);
+}
+
+.error {
+    background-color: red;
+}
