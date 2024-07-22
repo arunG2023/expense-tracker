@@ -26,3 +26,21 @@
     font-size: 17px;
     text-align: center;
 }
+
+.t2-blue {
+    color: #6366f1;
+    font-size: 25px;
+    text-align: center;
+}
+
+.text-small {
+    font-size: 17px;
+}
+
+.weight-500 {
+    font-weight: 500;
+}
+
+.pointer {
+    cursor: pointer;
+}
