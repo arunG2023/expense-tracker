@@ -39,7 +39,8 @@ export const htmlLabel = {
         LOGIN_FORM_HEADER: "User Login",
         NO_ACCOUNT: "Don't have an account?",
         REGISTER_FORM_HEADER: "Create User",
-        ACOOUNT_ALREADY_PRESENT: "Already have an account"
+        ACOOUNT_ALREADY_PRESENT: "Already have an account",
+        APPLICATION_NAME: "Expense Tracker",
 
     },
     BUTTON: {

@@ -4,6 +4,7 @@
     <app-sidebar *ngIf="enableSideBar" (sideBarClose)="closeSideBar($event)"></app-sidebar>
     <div class="main-panel">
         <app-header (sideBar)="showSideBar($event)" (isDarkMode)="changeTheme($event)"></app-header>
+        <router-outlet></router-outlet>
     </div>
 </div>
 

@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { RouteService } from 'src/app/core/services/route.service';
 
 @Component({
   selector: 'app-header',
@@ -6,16 +8,23 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
   @Output() isDarkMode: EventEmitter<boolean> = new EventEmitter(false);
   @Output() sideBar: EventEmitter<boolean> = new EventEmitter(false);
   public darkTheme: boolean = false;
   public sideBarVal: boolean = false;
+  public pageTitle: string = '';
 
-  constructor() { }
+  constructor(
+    private _routerService: RouteService
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this._routerService.routeTitle.subscribe(sideBar => {
+      this.pageTitle = sideBar.title;
+    })
   }
+
+
 
   public changeTheme(val: boolean) {
     this.darkTheme = val;
