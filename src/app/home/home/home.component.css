@@ -1,0 +1,28 @@
+.light-theme {
+    --backgroud-color: white;
+    --sidebar-background-color: white;
+    --sidebar-item-text-color: #4b5563;
+    --navbar-background-color: none;
+    --navbar-hamburger-hover-border-color: white;
+    --sidebar-box-shadow: 0px 4px 50px #D9DDFC;
+    --sidebar-border: 1px solid #f5f3f5;
+    --sidebar-white-space-background-color: rgba(0, 0, 0, 0.4);
+
+}
+
+
+.dark-theme {
+    --backgroud-color: black;
+    --sidebar-background-color: #0f1522;
+    --sidebar-item-text-color: white;
+    --navbar-background-color: black;
+    --navbar-hamburger-hover-border-color: black;
+    --sidebar-box-shadow: none;
+    --sidebar-border:  1px solid rgba(255,255,255,.1);
+    --sidebar-white-space-background-color: rgba(0, 0, 0, 0.4);
+}
+
+.home{
+    height: 100vh;
+    background-color: var(--backgroud-color);
+}

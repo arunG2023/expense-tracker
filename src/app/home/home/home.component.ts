@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -8,8 +9,12 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class HomeComponent implements OnInit {
 
+  public changeDarkTheme: boolean = false;
+  public enableSideBar: boolean = false;
+
   constructor(
-    private _userService: UserService
+    private _userService: UserService,
+    private _router: Router
   ) { }
 
   ngOnInit(): void {
@@ -17,6 +22,18 @@ export class HomeComponent implements OnInit {
 
   public logOut(){
     this._userService.logOutUser();
+  }
+
+  public changeTheme(value: boolean){
+    this.changeDarkTheme = value;
+  }
+
+  public showSideBar(value: boolean){
+    this.enableSideBar = value
+  }
+
+  public closeSideBar(value: boolean){
+    this.enableSideBar = !value;
   }
 
 }

@@ -18,3 +18,11 @@ export interface SnackBar {
     type: string;
     time: number;
 }
+
+
+export interface SideBar {
+    path: string;
+    title: string;
+    icon: string;
+    isActive: boolean;
+}

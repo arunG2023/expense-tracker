@@ -1,1 +1,10 @@
-<button (click)="logOut()">Log Out</button>
+<!-- <button (click)="logOut()">Log Out</button> -->
+
+<div class="home" [ngClass]="(changeDarkTheme)? 'dark-theme' : 'light-theme'">
+    <app-sidebar *ngIf="enableSideBar" (sideBarClose)="closeSideBar($event)"></app-sidebar>
+    <div class="main-panel">
+        <app-header (sideBar)="showSideBar($event)" (isDarkMode)="changeTheme($event)"></app-header>
+    </div>
+</div>
+
+
