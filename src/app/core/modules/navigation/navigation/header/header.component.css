@@ -10,6 +10,7 @@
     background-color: var(--navbar-background-color);
     padding-top: 20px;
     padding-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 .header-left-section {

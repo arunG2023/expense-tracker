@@ -1,9 +1,9 @@
 <div class="sidebar-container">
     <div class="sidebar">
         <div class="sidebar-header t2-blue">
-            Expense Tracker
+            {{ htmlLabel['TEXT']['APPLICATION_NAME'] }}
         </div>
-        <div *ngFor="let sideBar of sideBarItems" class="sidebar-item pointer" [ngClass]="(sideBar.isActive)? 'sidebar-item-active' : ''">
+        <div *ngFor="let sideBar of sideBarItems" (click)="gotoLocation(sideBar)" class="sidebar-item pointer" [ngClass]="(sideBar.isActive)? 'sidebar-item-active' : ''">
             <div><img class="side-bar-item-icon" [src]="sideBar.icon"></div>
             <div class="text-small">{{sideBar.title}}</div>
         </div>

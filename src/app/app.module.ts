@@ -5,16 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SnackBarComponent } from "./core/components/snack-bar/snack-bar.component";
+import { HomeComponent } from './home/home/home.component';
+import { NavigationModule } from './core/modules/navigation/navigation/navigation.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    SnackBarComponent
+    SnackBarComponent,
+    NavigationModule
 ],
   providers: [],
   bootstrap: [AppComponent]

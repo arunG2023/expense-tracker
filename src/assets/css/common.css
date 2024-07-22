@@ -41,6 +41,14 @@
     font-weight: 500;
 }
 
+.weight-600 {
+    font-weight: 600;
+}
+
 .pointer {
     cursor: pointer;
+}
+
+.text-big{
+    font-size: 2rem;
 }

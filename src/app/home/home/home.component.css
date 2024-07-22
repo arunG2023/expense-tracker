@@ -1,5 +1,5 @@
 .light-theme {
-    --backgroud-color: white;
+    --backgroud-color: #f9fafb;
     --sidebar-background-color: white;
     --sidebar-item-text-color: #4b5563;
     --navbar-background-color: none;
@@ -7,6 +7,12 @@
     --sidebar-box-shadow: 0px 4px 50px #D9DDFC;
     --sidebar-border: 1px solid #f5f3f5;
     --sidebar-white-space-background-color: rgba(0, 0, 0, 0.4);
+
+    /* Dashboard */
+    --top-section-card-background: white;
+    --top-section-card-border-color: rgba(50, 46, 46, 0.1);;
+    --top-section-card-shadow: 0px 4px 30px rgba(221, 224, 255, .54);
+    --top-section-card-amount-text-color: black;
 
 }
 
@@ -20,9 +26,15 @@
     --sidebar-box-shadow: none;
     --sidebar-border:  1px solid rgba(255,255,255,.1);
     --sidebar-white-space-background-color: rgba(0, 0, 0, 0.4);
+    --top-section-card-background: #0f1522;
+    --top-section-card-border-color: rgba(255,255,255,.1);
+    /* --top-section-card-shadow: 0px 4px 30px rgba(221, 224, 255, .54); */
+    --top-section-card-shadow: none;
+    --top-section-card-amount-text-color: white;
+
 }
 
 .home{
     height: 100vh;
-    background-color: var(--backgroud-color);
+    background: var(--backgroud-color);
 }
