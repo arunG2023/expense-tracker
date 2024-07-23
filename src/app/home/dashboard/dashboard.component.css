@@ -1,6 +1,5 @@
 .dashboard-main{
     width: 100%;
-    height: 90vh;
     padding: 10px 20px;
     
 }
@@ -12,36 +11,118 @@
 }
 
 .amount-cards {
-    background-color: var(--top-section-card-background);
-    border: 1px solid var(--top-section-card-border-color);
-    box-shadow: var(--top-section-card-shadow);
-    border-radius: 20px;
-    padding: 30px 20px;
     display: flex;
     flex-direction: column;
     align-items: start;
     justify-content: center;
-    margin-bottom: 20px;
 }
 
 
+
+
+.text-small {
+    color: var(--sidebar-item-text-color);
+}
+
+.text-big, .text-medium {
+    color: var(--top-section-card-amount-text-color);
+}
+
+.graph-section, .bar-section, .amount-cards{
+    background-color: var(--top-section-card-background);
+    border: 1px solid var(--top-section-card-border-color);
+    box-shadow: var(--top-section-card-shadow);
+    border-radius: 20px;
+    padding: 30px 25px;
+    margin-bottom: 20px;
+}
+
+.middle-section {
+    display: grid;
+    grid-template-columns: 2fr 0.4fr;
+    column-gap: 20px;
+}
+
+
+
+
+.graph-section > div:nth-child(1){
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.graph-section > div:nth-child(2){
+   height: 300px;
+   display: flex;
+   align-items: center;
+}
+
+.graph-section > div:nth-child(3), .bar-section > div:nth-child(3){
+    margin-top: 20px;
+    justify-content: space-evenly;
+}
+
+select {
+    /* margin-right: 20px; */
+    width: 140px;
+    border: 1px solid var(--select-border-color);
+    border-radius: 4px;
+    padding: 8px;
+    background-color: var(--backgroud-color);
+}
+
+.graph-canvas{
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+select:hover{
+    border-color: #6366f1;
+}
+
+select:active{
+    box-shadow:  var(--top-section-card-shadow);
+}
+
+.text-medium{
+    display: flex;
+    align-items: center;
+}
+
+.bar-section > div:nth-child(1){
+    margin-bottom: 20px;
+}
+
+.bar-section > div:nth-child(2){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Media query */
 @media screen and (max-width: 600px){
     .top-section{
         grid-template-columns: 1fr;
     }
+
+    .middle-section {
+        grid-template-columns: 1fr
+    }
+
+    .graph-section > div:nth-child(2){
+        height: 125px;
+     }
 }
 
 @media screen and (min-width: 601px) and (max-width: 950px){
     .top-section{
         grid-template-columns: 1fr 1fr ;
     }
-}
 
-
-.amount-cards .text-small {
-    color: var(--sidebar-item-text-color);
-}
-
-.amount-cards .text-big {
-    color: var(--top-section-card-amount-text-color);
+    .middle-section {
+        grid-template-columns: 1fr
+    }
 }

@@ -10,9 +10,10 @@
 
     /* Dashboard */
     --top-section-card-background: white;
-    --top-section-card-border-color: rgba(50, 46, 46, 0.1);;
+    --top-section-card-border-color: rgba(50, 46, 46, 0.1);
     --top-section-card-shadow: 0px 4px 30px rgba(221, 224, 255, .54);
     --top-section-card-amount-text-color: black;
+    --select-border-color: rgba(50, 46, 46, 0.1);
 
 }
 
@@ -31,10 +32,9 @@
     /* --top-section-card-shadow: 0px 4px 30px rgba(221, 224, 255, .54); */
     --top-section-card-shadow: none;
     --top-section-card-amount-text-color: white;
-
+    --select-border-color:  #303643;
 }
 
 .home{
-    height: 100vh;
     background: var(--backgroud-color);
 }

@@ -41,6 +41,10 @@ export const htmlLabel = {
         REGISTER_FORM_HEADER: "Create User",
         ACOOUNT_ALREADY_PRESENT: "Already have an account",
         APPLICATION_NAME: "Expense Tracker",
+        GRAPH_NAME: "Expense Overview",
+        PIE_CHART_NAME: "Expense Split Up",
+        CATEGORY: "Category",
+        MODE: "Mode",
 
     },
     BUTTON: {
@@ -68,4 +72,22 @@ export const snackBar = {
         MIN: 2000,
         MAX: 10000
     }
+}
+
+export const graphFilter = [
+    {
+        option: "This Week"
+    },
+    {
+        option: "Last Week"
+    }
+];
+
+
+export const chartConfig = {
+    TEXT_COLOR: "#acaeb3",
+    BAR_COLOR: "#6366f1",
+    BAR_LABEL: "Expense",
+    X_AXIS: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat","Sun"],
+
 }

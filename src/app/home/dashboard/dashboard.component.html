@@ -7,15 +7,59 @@
         </div>
         <div class="amount-cards">
             <div class="text-small weight-600">Sales</div>
-            <div class="text-big weight-600">&#8377; 100</div>  
+            <div class="text-big weight-600">&#8377; {{ number | round:2}}</div>  
           </div>
           <div class="amount-cards">
             <div class="text-small weight-600">Sales</div>
-            <div class="text-big weight-600">&#8377; 100</div>  
+            <div class="text-big weight-600">&#8377; 100.13</div>  
           </div>
           <div class="amount-cards">
             <div class="text-small weight-600">Sales</div>
-            <div class="text-big weight-600">&#8377; 100</div>  
+            <div class="text-big weight-600">&#8377; 1004.23</div>  
           </div>
      </div>
+
+    <!-- middle section  -->
+     <div class="middle-section">
+        <div class="graph-section">
+          <div>
+            <div class="text-medium weight-600">
+              {{htmlLabel['TEXT']['GRAPH_NAME']}}
+            </div>
+            <div>
+              <select  class="text-small">
+                <option *ngFor="let option of graphFilter" [value]="option.option">{{option.option}}</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <canvas  id="weeklyChart" class="graph-canvas text-small" >{{ weeklyChart }}</canvas>
+          </div>
+          <div class="text-medium">
+            <div>
+              <label><input (click)="createWeeklyGraph('bar')" type="radio" name="chartType" checked>Bar Graph</label>
+            </div>
+            <div>
+              <label> <input (click)="createWeeklyGraph('line')" type="radio" name="chartType">Line Graph</label>
+            </div>
+          </div>
+        </div>
+        <div class="bar-section">
+          <div class="text-medium weight-600">
+            {{ htmlLabel['TEXT']['PIE_CHART_NAME'] }}
+          </div>
+          <div>
+            <canvas id="pieChart" class="text-small" >{{ categoryChart }}</canvas>
+          </div>
+          <div class="text-medium">
+            <div>
+              <label><input type="radio" name="pieChartType" checked> {{ htmlLabel['TEXT']['CATEGORY'] }} </label>
+            </div>
+            <div>
+              <label> <input type="radio" name="pieChartType"> {{ htmlLabel['TEXT']['MODE'] }}</label>
+            </div>
+          </div>
+        </div>
+     </div>
 </div>
+

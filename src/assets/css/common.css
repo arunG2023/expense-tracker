@@ -37,6 +37,10 @@
     font-size: 17px;
 }
 
+.text-medium {
+    font-size: 20px;
+}
+
 .weight-500 {
     font-weight: 500;
 }
