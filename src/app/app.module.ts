@@ -8,6 +8,7 @@ import { SnackBarComponent } from "./core/components/snack-bar/snack-bar.compone
 import { HomeComponent } from './home/home/home.component';
 import { NavigationModule } from './core/modules/navigation/navigation/navigation.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,7 @@ import { NavigationModule } from './core/modules/navigation/navigation/navigatio
     AppRoutingModule,
     HttpClientModule,
     SnackBarComponent,
-    NavigationModule
+    NavigationModule,
 ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,6 +6,7 @@ import { NavigationModule } from '../core/modules/navigation/navigation/navigati
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddExpenseComponent } from './add-expense/add-expense.component';
 import { ListExpenseComponent } from './list-expense/list-expense.component';
+import { RoundPipe } from '../core/pipes/round.pipe';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ListExpenseComponent } from './list-expense/list-expense.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
+    RoundPipe
   ]
 })
 export class HomeModule { }
