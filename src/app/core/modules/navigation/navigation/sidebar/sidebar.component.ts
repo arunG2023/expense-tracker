@@ -22,6 +22,16 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this._routerService.routeTitle.subscribe(sideBar => {
+      this.sideBarItems.forEach(item => {
+        if(item == sideBar){
+          item.isActive = true;
+        }
+        else{
+          item.isActive = false;
+        }
+      })
+    })
   }
 
   public closeSideBar(){
@@ -30,7 +40,6 @@ export class SidebarComponent implements OnInit {
 
   public gotoLocation(sideBar: SideBar){
     this._router.navigate([routesConfig.HOME ,sideBar.path]);
-    this.sideBarItems.forEach(item => item.isActive = (item.path == sideBar.path)? true : false);
     this._routerService.setTitle(sideBar);
     this.sideBarClose.emit(true);
   }

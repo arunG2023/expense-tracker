@@ -26,3 +26,9 @@ export interface SideBar {
     icon: string;
     isActive: boolean;
 }
+
+export interface ExpenseTableData {
+    title: string;
+    limit: number;
+    data: any[];
+}

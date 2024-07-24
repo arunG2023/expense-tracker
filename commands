@@ -6,3 +6,4 @@
 5.New Standalone 
   component             - ng g c <component-name> --standalone
 6.New Pipe              - ng g p <pipe-name>
+7.Ngx Paginator         - npm install ngx-pagination

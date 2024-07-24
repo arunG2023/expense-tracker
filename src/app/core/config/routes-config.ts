@@ -15,7 +15,7 @@ export const sideBarRoutes: SideBar[] = [
     {
         title: "Dashboard",
         path: routesConfig.DASHBOARD,
-        isActive: true,
+        isActive: false,
         icon: "../../../../../../assets/icons/dashboard.png"
     },
     {

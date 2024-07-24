@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddExpenseComponent } from './add-expense/add-expense.component';
 import { ListExpenseComponent } from './list-expense/list-expense.component';
 import { RoundPipe } from '../core/pipes/round.pipe';
+import { ExpenseTableComponent } from '../core/components/expense-table/expense-table.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { RoundPipe } from '../core/pipes/round.pipe';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    RoundPipe
+    RoundPipe,
+    ExpenseTableComponent
   ]
 })
 export class HomeModule { }

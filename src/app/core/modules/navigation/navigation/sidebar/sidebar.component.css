@@ -4,6 +4,7 @@
     display: grid;
     grid-template-columns: 275px 1fr;
     position: fixed;
+    z-index: 1000;
 }
 
 .sidebar-white-space{
