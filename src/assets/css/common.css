@@ -56,3 +56,8 @@
 .text-big{
     font-size: 2rem;
 }
+
+.align-center{
+    display: flex;
+    align-items: center;
+}

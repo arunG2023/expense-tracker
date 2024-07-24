@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { routesConfig, sideBarRoutes } from '../config/routes-config';
+import { sideBarRoutes } from '../config/routes-config';
 import { SideBar } from '../interfaces/interface';
 
 @Injectable({

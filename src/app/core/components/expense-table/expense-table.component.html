@@ -1,0 +1,51 @@
+<div class="table-section">
+  <div>
+    <div class="align-center text-medium weight-600">
+      {{inputData.title}}
+    </div>
+    <div class="align-center">
+      <div class="search-bar">
+        <div class="input-group">
+          <div class="search-icon text-big">&#9906;</div>
+          <div>
+            <input type="text" (ngModelChange)="filterTable($event)" [ngModel]="searchInput" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="download-icon">
+          <img src="../../../assets/icons/download-before.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <table class="expense-table">
+      <tr class="text-small weight-600 table-header">
+        <td>{{htmlLabel['TABLE']["EXPENSE"]}}</td>
+        <td>{{htmlLabel['TABLE']["CATEGORY"]}}</td>
+        <td>{{htmlLabel['TABLE']["AMOUNT"]}}</td>
+        <td>{{htmlLabel['TABLE']["MODE"]}}</td>
+        <td>{{htmlLabel['TABLE']["ACTION"]}}</td>
+      </tr>
+      <tr class="text-small" *ngFor="let expense of expenseTableData | paginate: { itemsPerPage: inputData.limit , currentPage: page } ">
+        <td>{{expense.name}}</td>
+        <td>{{expense.category}}</td>
+        <td>&#8377; {{expense.amount}}</td>
+        <td>{{expense.mode}}</td>
+        <td>
+          <div class="action">
+            <img class="pointer" src="../../../../assets/icons/edit.png" alt="">
+            <img class="pointer" src="../../../../assets/icons/delete.png" alt="">
+          </div>
+        </td>
+      </tr>
+      <tr>
+
+        <td colspan="5" class="pagination-control text-small" >
+          <pagination-controls  (pageChange)="pageChanged($event)" ></pagination-controls>
+         </td>
+      </tr>
+    </table>
+  </div>
+</div>

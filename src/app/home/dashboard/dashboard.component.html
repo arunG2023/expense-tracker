@@ -37,10 +37,10 @@
           </div>
           <div class="text-medium">
             <div>
-              <label><input (click)="createWeeklyGraph('bar')" type="radio" name="chartType" checked>Bar Graph</label>
+              <label class="pointer"><input (click)="createWeeklyGraph('bar')" type="radio" name="chartType" checked>Bar Graph</label>
             </div>
             <div>
-              <label> <input (click)="createWeeklyGraph('line')" type="radio" name="chartType">Line Graph</label>
+              <label class="pointer"><input (click)="createWeeklyGraph('line')" type="radio" name="chartType">Line Graph</label>
             </div>
           </div>
         </div>
@@ -53,13 +53,18 @@
           </div>
           <div class="text-medium">
             <div>
-              <label><input type="radio" name="pieChartType" checked> {{ htmlLabel['TEXT']['CATEGORY'] }} </label>
+              <label class="pointer"><input type="radio" name="pieChartType" checked> {{ htmlLabel['TEXT']['CATEGORY'] }} </label>
             </div>
             <div>
-              <label> <input type="radio" name="pieChartType"> {{ htmlLabel['TEXT']['MODE'] }}</label>
+              <label class="pointer"><input type="radio" name="pieChartType"> {{ htmlLabel['TEXT']['MODE'] }}</label>
             </div>
           </div>
         </div>
      </div>
+
+     <!-- bottom section -->
+    <app-expense-table 
+        [inputData]="expenseTableData">
+    </app-expense-table>
 </div>
 

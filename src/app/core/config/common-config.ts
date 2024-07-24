@@ -59,6 +59,14 @@ export const htmlLabel = {
         ENTER_LAST_NAME: "Enter Last Name",
         ENTER_PHONE: "Enter Phone Number",
         ENTER_ADDRESS: "Enter Address",
+    },
+
+    TABLE: {
+        EXPENSE: "Expense",
+        CATEGORY: "Category",
+        AMOUNT: "Amount",
+        MODE: "Mode",
+        ACTION: "Actions"
     }
 }
 

@@ -15,6 +15,12 @@
     --top-section-card-amount-text-color: black;
     --select-border-color: rgba(50, 46, 46, 0.1);
 
+    /* expense table */
+    --table-header-hover-color: rgba(67, 67, 67, 0.235);  
+    --table-header-background-color: rgb(249, 250, 251);  
+    --table-header-background-active: #eef2ff;
+    --table-header-text-color-active: #4338ca;
+
 }
 
 
@@ -33,6 +39,12 @@
     --top-section-card-shadow: none;
     --top-section-card-amount-text-color: white;
     --select-border-color:  #303643;
+
+     /* expense table */
+     --table-header-hover-color: rgba(0, 0, 0, 0.4);
+     --table-header-background-color: rgb(15, 21, 34);
+     --table-header-background-active: rgba(129, 140, 248, 0.16);
+     --table-header-text-color-active:rgba(255, 255, 255, 0.87);
 }
 
 .home{
