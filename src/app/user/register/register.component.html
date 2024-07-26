@@ -38,7 +38,7 @@
             <div class="d-flex justify-content-center align-items-center">
                 <button (click)="createUser()" class="btn btn-primary mt-4">{{ htmlLabel['BUTTON']['SIGN_UP'] }}</button>
             </div>
-            <div class="mt-1">
+            <div class="mt-1 text-center">
                 <span>{{ htmlLabel['TEXT']['ACOOUNT_ALREADY_PRESENT'] }} </span><span><a class="link" [routerLink]="['/', routes.USER, routes.LOGIN]">{{ htmlLabel['BUTTON']['LOGIN'] }}</a></span>
             </div>
         </form>

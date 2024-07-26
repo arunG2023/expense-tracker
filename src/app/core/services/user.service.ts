@@ -35,4 +35,8 @@ export class UserService {
     localStorage.removeItem('Token');
     this._router.navigate(['']);
   }
+
+  public getAccessToken(): any{
+    return localStorage.getItem('Token');
+  }
 }

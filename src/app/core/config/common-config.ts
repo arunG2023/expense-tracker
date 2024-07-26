@@ -99,3 +99,37 @@ export const chartConfig = {
     X_AXIS: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat","Sun"],
 
 }
+
+
+export const errorPageConfig = {
+    INTERNAL_SERVER_ERROR: {
+        code: "500",
+        type: "OOPS! Internal Server Error",
+        text: "Internal Server Error Boo-Boo: Our Bad! The server hiccuped. We're dusting off the code and will have it sorted soon. Please be patient",
+        button_text: "Be Patient, Try Again",
+        icon: {
+            light_theme: "../../../../assets/icons/500-light.png",
+            dark_theme: "../../../../assets/icons/500-dark.png"
+        }
+    },
+    PAGE_NOT_FOUND: {
+        code: "404",
+        type: "OOPS! Page Not Found",
+        text: "Oopsie-daisy! The page you requested seems to have taken a vacation. Return to the home page and continue your journey.",
+        button_text: "Back to Safety",
+        icon: {
+            light_theme: "../../../../assets/icons/not-found-light.png",
+            dark_theme: "../../../../assets/icons/not-found-dark.png"
+        }
+    },
+    FORBIDDEN: {
+        code: "403",
+        type: "OOPS! Forbidden",
+        text: "This page is more off-limits than Area 51....Only those with super clearance can proceed",
+        button_text: "Log In",
+        icon: {
+            light_theme: "../../../../assets/icons/access-denied-light.png",
+            dark_theme: "../../../../assets/icons/access-denied-dark.png"
+        }
+    }
+}

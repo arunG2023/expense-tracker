@@ -7,7 +7,8 @@ export const routesConfig = {
     REGISTER: "sign-up",
     DASHBOARD: "dashboard",
     ADD_EXPENSE: "add-expense",
-    LIST_ALL_EXPENSE: "show-all-expenses"
+    LIST_ALL_EXPENSE: "show-all-expenses",
+    ERROR_PAGE: "error"
 }
 
 

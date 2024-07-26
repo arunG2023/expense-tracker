@@ -1,0 +1,24 @@
+<div class="error-main light-theme">
+    <div class="error-icon">
+        <img [src]="errorData.icon.light_theme" alt="">
+    </div>
+    <div class="error-code">
+        <div>
+            {{errorData.code}}
+        </div>
+        <div>
+            {{errorData.type}}
+        </div>
+    </div>
+    <div class="error-text">
+        <div>
+            {{errorData.text}}
+        </div>
+    </div>
+    <div class="error-button">
+        <div>
+            <button (click)="retry(errorData.code)">{{errorData.button_text}}</button>
+        </div>
+    </div>
+</div>
+<app-loading-spinner *ngIf="loadSpinner"></app-loading-spinner>
