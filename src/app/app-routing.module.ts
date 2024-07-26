@@ -23,6 +23,13 @@ const routes: Routes = [
     path: routesConfig.ERROR_PAGE,
     component: ErrorPageComponent,
     pathMatch: 'full'
+  },
+
+  // Wild card route:
+  {
+    path: "**",
+    redirectTo: routesConfig.ERROR_PAGE + "?code=404",
+    pathMatch: 'full'
   }
 ];
 
