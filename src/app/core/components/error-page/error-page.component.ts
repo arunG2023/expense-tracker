@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ErrorData } from '../../interfaces/interface';
 import { errorPageConfig } from '../../config/common-config';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '../../config/routes-config';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-error-page',
@@ -20,20 +21,25 @@ export class ErrorPageComponent implements OnInit {
 
   constructor(
       private _activatedRoute: ActivatedRoute,
-      private _router: Router
+      private _router: Router,
+      private _location: Location,
+      private _userService: UserService
   ) { }
 
   ngOnInit(): void {
     this._activatedRoute.queryParams.subscribe(params => {
-      console.log(params);
+      
       if(params['code'] == 403){
         this.errorData = errorPageConfig.FORBIDDEN;
       }
       else if(params['code'] == 404){
         this.errorData = errorPageConfig.PAGE_NOT_FOUND;
       }
-      else{
+      else if(params['code'] == 500){
         this.errorData = errorPageConfig.INTERNAL_SERVER_ERROR;
+      }
+      else{
+        this.errorData = errorPageConfig.PAGE_NOT_FOUND;
       }
     })
   }
@@ -41,11 +47,23 @@ export class ErrorPageComponent implements OnInit {
 
   public retry(errorCode: string){
     this.loadSpinner = true;
-    if(errorCode == '500' || errorCode == '404'){
+    if(errorCode == '500'){
       setTimeout(() => {
         this.loadSpinner = false;
-        this._router.navigate([routesConfig.HOME,routesConfig.DASHBOARD]);
+        if(this._userService.isLoggedIn()){
+          this._router.navigate([routesConfig.HOME,routesConfig.DASHBOARD]);
+        }
+        else{
+          this._router.navigate([routesConfig.USER,routesConfig.LOGIN]);
+        }
       }, 1000)
+    }
+    else if(errorCode == '404'){
+      setTimeout(() => {
+        this.loadSpinner = false;
+        this._location.back();
+      }, 1000)
+      
     }
     else{
       this.loadSpinner = false;
