@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { chartConfig, graphFilter, htmlLabel } from 'src/app/core/config/common-config';
 import Chart, { ChartTypeRegistry } from 'chart.js/auto';
 import { ExpenseTableData } from 'src/app/core/interfaces/interface';
+import { ExpenseService } from 'src/app/core/services/expense.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -65,11 +66,15 @@ export class DashboardComponent implements OnInit {
     ]
   }
 
-  constructor() { }
+  constructor(
+        private _expenseService: ExpenseService
+  ) { }
 
   ngOnInit(): void {
     this.createWeeklyGraph('bar');
     this.createPieChart();
+
+    this._expenseService.getUserExpenses().subscribe(res => console.log(res), err => console.log(err))
   }
 
 

@@ -61,3 +61,7 @@
     display: flex;
     align-items: center;
 }
+
+.text-center{
+    text-align: center;
+}

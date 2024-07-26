@@ -32,3 +32,14 @@ export interface ExpenseTableData {
     limit: number;
     data: any[];
 }
+
+export interface ErrorData {
+    code: string;
+    type: string;
+    text: string;
+    button_text: string;
+    icon: {
+        light_theme: string;
+        dark_theme: string
+    }
+}

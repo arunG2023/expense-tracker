@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SnackBarComponent } from "./core/components/snack-bar/snack-bar.component";
 import { HomeComponent } from './home/home/home.component';
 import { NavigationModule } from './core/modules/navigation/navigation/navigation.module';
+import { ApiErrorInterceptor } from './core/interceptors/api-error.interceptor';
+import { ApiHeaderInterceptor } from './core/interceptors/api-header.interceptor';
 
 
 @NgModule({
@@ -21,7 +23,18 @@ import { NavigationModule } from './core/modules/navigation/navigation/navigatio
     SnackBarComponent,
     NavigationModule,
 ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiErrorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiHeaderInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
