@@ -1,6 +1,8 @@
 export const validationLimit = {
     PASSWORD_MIN_LENGTH: 4,
     PASSWORD_MAX_LENGTH: 10,
+    STRING_MAX_LENGTH: 20,
+    LIST_ALL_EXPENSE_ROW_LIMIT: 15,
 }
 
 export const validationRegex = {
@@ -45,6 +47,11 @@ export const htmlLabel = {
         PIE_CHART_NAME: "Expense Split Up",
         CATEGORY: "Category",
         MODE: "Mode",
+        ALL_EXPENSES: "All Expenses",
+        TOTAL_EXPENSE: "Total Expenese",
+        THIS_MONTH: "This month",
+        THIS_WEEK: "This week",
+        TODAY: "Today"
 
     },
     BUTTON: {
@@ -66,7 +73,8 @@ export const htmlLabel = {
         CATEGORY: "Category",
         AMOUNT: "Amount",
         MODE: "Mode",
-        ACTION: "Actions"
+        ACTION: "Actions",
+        DATE: "Date"
     }
 }
 

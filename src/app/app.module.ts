@@ -9,7 +9,7 @@ import { HomeComponent } from './home/home/home.component';
 import { NavigationModule } from './core/modules/navigation/navigation/navigation.module';
 import { ApiErrorInterceptor } from './core/interceptors/api-error.interceptor';
 import { ApiHeaderInterceptor } from './core/interceptors/api-header.interceptor';
-
+import { LoadingSpinnerComponent } from "./core/components/loading-spinner/loading-spinner.component";
 
 @NgModule({
   declarations: [
@@ -22,6 +22,7 @@ import { ApiHeaderInterceptor } from './core/interceptors/api-header.interceptor
     HttpClientModule,
     SnackBarComponent,
     NavigationModule,
+    LoadingSpinnerComponent
 ],
   providers: [
     {

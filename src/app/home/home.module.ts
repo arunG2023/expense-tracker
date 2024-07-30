@@ -8,6 +8,8 @@ import { AddExpenseComponent } from './add-expense/add-expense.component';
 import { ListExpenseComponent } from './list-expense/list-expense.component';
 import { RoundPipe } from '../core/pipes/round.pipe';
 import { ExpenseTableComponent } from '../core/components/expense-table/expense-table.component';
+import { LoadingSpinnerComponent } from "../core/components/loading-spinner/loading-spinner.component";
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { ExpenseTableComponent } from '../core/components/expense-table/expense-
     CommonModule,
     HomeRoutingModule,
     RoundPipe,
-    ExpenseTableComponent
-  ]
+    ExpenseTableComponent,
+    LoadingSpinnerComponent,
+    FormsModule
+]
 })
 export class HomeModule { }

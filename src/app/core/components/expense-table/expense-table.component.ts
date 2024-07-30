@@ -5,6 +5,7 @@ import { htmlLabel } from '../../config/common-config';
 import { RoundPipe } from '../../pipes/round.pipe';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TruncateStringPipe } from '../../pipes/truncate-string.pipe';
 
 @Component({
   selector: 'app-expense-table',
@@ -13,7 +14,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
             CommonModule,
             RoundPipe,
             FormsModule,
-            NgxPaginationModule
+            NgxPaginationModule,
+            TruncateStringPipe
           ],
   templateUrl: './expense-table.component.html',
   styleUrls: ['./expense-table.component.css']

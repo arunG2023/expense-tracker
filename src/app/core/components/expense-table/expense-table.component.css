@@ -1,14 +1,14 @@
-.table-section{
+.table-section {
     background-color: var(--top-section-card-background);
     border: 1px solid var(--top-section-card-border-color);
     box-shadow: var(--top-section-card-shadow);
     border-radius: 20px;
     padding: 30px 25px;
     margin-bottom: 20px;
-    
+
 }
 
-.table-section > div:nth-child(1){
+.table-section>div:nth-child(1) {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
@@ -20,12 +20,13 @@
     color: var(--sidebar-item-text-color);
 }
 
-.text-big, .text-medium {
+.text-big,
+.text-medium {
     color: var(--top-section-card-amount-text-color);
 }
 
 
-.search-bar input[type = "text"]{
+.search-bar input[type="text"] {
     all: unset;
     border-radius: 4px;
     padding: 4px;
@@ -37,8 +38,9 @@
 
 .search-bar div {
     display: flex;
-    align-items: center;    
-    color:  #4b5563;;
+    align-items: center;
+    color: #4b5563;
+    ;
 }
 
 
@@ -50,9 +52,9 @@
     margin-right: 10px;
 }
 
-.download-icon img{
+.download-icon img {
     width: 40px;
-    height: 40px;   
+    height: 40px;
 }
 
 .download-icon {
@@ -61,27 +63,27 @@
     border: 2px solid var(--top-section-card-background);
 }
 
-.download-icon:hover{
+.download-icon:hover {
     border: 2px solid #6366f1;
 }
 
-.download-icon:active{
+.download-icon:active {
     background-color: #292cdd;
 }
 
-.search-bar > div > div:nth-child(1){
-   margin: 0px 5px;
+.search-bar>div>div:nth-child(1) {
+    margin: 0px 5px;
 }
 
-.search-icon{
-    -webkit-transform: rotate(45deg); 
-    -moz-transform: rotate(45deg); 
+.search-icon {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
 }
 
 
-.expense-table{
+.expense-table {
     width: 100%;
 }
 
@@ -92,17 +94,18 @@
 
 .expense-table td {
     padding: 20px 10px;
+    min-width: 150px;
 }
 
-.expense-table > .table-header {
+.expense-table>.table-header {
     background-color: var(--table-header-background-color);
 }
 
-.expense-table > .table-header td:hover{
-    background-color:var(--table-header-hover-color);
+.expense-table>.table-header td:hover {
+    background-color: var(--table-header-hover-color);
 }
 
-.expense-table > .table-header td:active{
+.expense-table>.table-header td:active {
     background: var(--table-header-background-active);
     color: var(--table-header-text-color-active);
 }
@@ -112,40 +115,41 @@
     width: 25px;
     height: 25px;
 }
- .action > img:nth-child(1){
+
+.action>img:nth-child(1) {
     margin: 0px 4%;
- }
+}
 
 
-@media screen and (max-width: 600px){
+
+@media screen and (max-width: 600px) {
     .search-bar {
         width: 75%;
         height: 50px;
     }
 
-    .search-bar > .input-group{
+    .search-bar>.input-group {
         width: 100%;
         height: 100%;
         flex-direction: column;
     }
 
-    .search-bar > .input-group > div:nth-child(2){
+    .search-bar>.input-group>div:nth-child(2) {
         height: 100%;
         width: 75%;
     }
 
-    .search-bar input[type = "text"]{
-        width: 100%;   
+    .search-bar input[type="text"] {
+        width: 100%;
     }
-
-    .table-section > div:nth-child(2){
-        overflow-x: scroll;
-    }
-    
-
-
 }
 
-.pagination-control{
+@media screen and (max-width: 1005px) {
+    .table-section>div:nth-child(2) {
+        overflow-x: scroll;
+    }
+}
+
+.pagination-control {
     text-align: center;
 }
