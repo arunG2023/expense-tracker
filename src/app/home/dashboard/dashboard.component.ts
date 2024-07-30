@@ -3,6 +3,7 @@ import { chartConfig, graphFilter, htmlLabel } from 'src/app/core/config/common-
 import Chart, { ChartTypeRegistry } from 'chart.js/auto';
 import { ExpenseTableData } from 'src/app/core/interfaces/interface';
 import { ExpenseService } from 'src/app/core/services/expense.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,6 @@ import { ExpenseService } from 'src/app/core/services/expense.service';
 export class DashboardComponent implements OnInit {
   public graphFilter: any[] = graphFilter;
   public htmlLabel: any = htmlLabel;
-  public number = '12.699';
 
   public weeklyChart: any;
   public categoryChart: any;
@@ -21,71 +21,68 @@ export class DashboardComponent implements OnInit {
   public expenseTableData: ExpenseTableData = {
     limit: 5,
     title: "Recent Expense",
-    data: [
-      {
-        name: "Tea",
-        category: "Drink",
-        mode: "Cash",
-        amount: 10
-      },
-      {
-        name: "Metro",
-        category: "Metro Pass",
-        mode: "GPAY",
-        amount: 500
-      },
-      {
-        name: "MilkyBar",
-        category: "Snack",
-        mode: "Cash",
-        amount: 10
-      },{
-        name: "My Phone",
-        category: "Recharge",
-        mode: "GPAY",
-        amount: 209.09
-      }
-      ,{
-        name: "Tea",
-        category: "Drink",
-        mode: "Cash",
-        amount: 10
-      },
-      {
-        name: "Bike Parking",
-        category: "Parking",
-        mode: "Cash",
-        amount: 20
-      },
-      {
-        name: "Brinch",
-        category: "Food",
-        mode: "Cash",
-        amount: 50
-      }
-    ]
+    data: []
   }
 
+  public loadSpinner: boolean = false;
+
+  // Subject to destroy
+  private _ngUnsubscribe: Subject<void> = new Subject();
+
+  public expenseDataFromAPI: any; 
+
+  public graphWeekFilter: string = graphFilter[0].option;
   constructor(
         private _expenseService: ExpenseService
   ) { }
 
   ngOnInit(): void {
-    this.createWeeklyGraph('bar');
-    this.createPieChart();
+  
+    this._expenseService.getExpenseData()
+      .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
+      .subscribe(data => {
+        
+        if(data && data.data){
+          this.expenseDataFromAPI = data.data;
+          this.createPieChart(data.data, 'category');
+          this.createWeeklyGraph('bar', graphFilter[0].option);
+          this.expenseTableData.data = data.data.allExpenses.slice(data.data.allExpenses.length - 10, data.data.allExpenses.length).reverse();
+        }
+      });
+   
+  }
 
-    this._expenseService.getUserExpenses().subscribe(res => console.log(res), err => console.log(err))
+  ngOnDestroy(): void{
+    this._ngUnsubscribe.next();
+    this._ngUnsubscribe.complete();
   }
 
 
 
-  public createWeeklyGraph(chartType: keyof ChartTypeRegistry){
+
+  public currentChartType: keyof ChartTypeRegistry = 'bar'
+  public createWeeklyGraph(chartType: keyof ChartTypeRegistry,filter: string){
     if(this.weeklyChart) this.weeklyChart.destroy(); 
+    this.currentChartType = chartType;
+    this.graphWeekFilter = filter;
 
     Chart.defaults.color = chartConfig.TEXT_COLOR;
 
     // Will be from API:
-    const yValues = [55, 49, 44, 24, 15,120,67.8];
+    let yValues: any[] = [];
+
+    if(filter == graphFilter[0].option){
+      if(this.expenseDataFromAPI && this.expenseDataFromAPI.currentWeekExpenses && this.expenseDataFromAPI.currentWeekExpenses.graphData.length){
+          yValues = this._buildWeekData(this.expenseDataFromAPI.currentWeekExpenses.graphData)
+      }
+    }
+    else{
+      if(this.expenseDataFromAPI && this.expenseDataFromAPI.previousWeekExpenses && this.expenseDataFromAPI.previousWeekExpenses.graphData.length){
+          yValues = this._buildWeekData(this.expenseDataFromAPI.previousWeekExpenses.graphData);
+      }
+    }
+
+
 
     this.weeklyChart = new Chart("weeklyChart", {
       type: chartType,
@@ -110,15 +107,33 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  public createPieChart(){
+  public createPieChart(data: any, type: string){
     if(this.categoryChart) this.categoryChart.destroy(); 
 
     Chart.defaults.color = chartConfig.TEXT_COLOR;
 
     // Will be from API:
-    const xValues = ['foo','ss','sa','sas','asasas','ewqeref','sdds'];
-    const yValues = [55, 49, 44, 24, 15,120,33.67];
-    const bg = ['red','green'];
+
+    // For Category
+    const xValues:any[] = [];
+    const yValues:any[] = [];
+   
+    if(data && type == 'category' && data.expenseCategoryData && data.expenseCategoryData.length > 0){
+      data.expenseCategoryData.forEach((category: any) => {
+        xValues.push(category.category);
+        yValues.push(category.amount)
+      })
+    }
+
+    if(data && type == 'mode' && data.expenseModeData && data.expenseModeData.length > 0){
+      data.expenseModeData.forEach((mode: any) => {
+        xValues.push(mode.mode);
+        yValues.push(mode.amount)
+      })
+    }
+   
+
+    const bg:any[] = [];
 
     xValues.forEach(x => {
       var r = Math.floor(Math.random() * 255);
@@ -147,6 +162,15 @@ export class DashboardComponent implements OnInit {
         
       }
     });
+  }
+
+
+  private _buildWeekData(data:any){
+    const yValues: number[] = [0,0,0,0,0,0,0];
+    data.forEach((exp:any) => {
+      yValues[chartConfig.X_AXIS.indexOf(exp.day)] = exp.amount;
+    });
+    return yValues;
   }
 
 }

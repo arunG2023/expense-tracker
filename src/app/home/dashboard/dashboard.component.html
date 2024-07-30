@@ -1,21 +1,21 @@
 <div class="dashboard-main">
     <!-- top section -->
-     <div class="top-section">
+     <div class="top-section" *ngIf="expenseDataFromAPI">
         <div class="amount-cards">
-          <div class="text-small weight-600">Sales</div>
-          <div class="text-big weight-600">&#8377; 100</div>  
+          <div class="text-small weight-600">{{htmlLabel['TEXT']['TOTAL_EXPENSE']}}</div>
+          <div class="text-big weight-600">&#8377; {{expenseDataFromAPI.totalAmount | round:2}}</div>  
         </div>
         <div class="amount-cards">
-            <div class="text-small weight-600">Sales</div>
-            <div class="text-big weight-600">&#8377; {{ number | round:2}}</div>  
+            <div class="text-small weight-600">{{htmlLabel['TEXT']['THIS_MONTH']}}</div>
+            <div class="text-big weight-600">&#8377; {{ expenseDataFromAPI.currentMonth.totalAmount | round:2}}</div>  
           </div>
           <div class="amount-cards">
-            <div class="text-small weight-600">Sales</div>
-            <div class="text-big weight-600">&#8377; 100.13</div>  
+            <div class="text-small weight-600">{{htmlLabel['TEXT']['THIS_WEEK']}}</div>
+            <div class="text-big weight-600">&#8377; {{expenseDataFromAPI.currentWeekExpenses.totalAmount | round:2}}</div>  
           </div>
           <div class="amount-cards">
-            <div class="text-small weight-600">Sales</div>
-            <div class="text-big weight-600">&#8377; 1004.23</div>  
+            <div class="text-small weight-600">{{htmlLabel['TEXT']['TODAY']}}</div>
+            <div class="text-big weight-600">&#8377; {{ expenseDataFromAPI.todayExpenses.totalAmount | round:2 }}</div>  
           </div>
      </div>
 
@@ -27,7 +27,7 @@
               {{htmlLabel['TEXT']['GRAPH_NAME']}}
             </div>
             <div>
-              <select  class="text-small">
+              <select [ngModel]="graphWeekFilter" (ngModelChange)="createWeeklyGraph(currentChartType, $event)" class="text-small">
                 <option *ngFor="let option of graphFilter" [value]="option.option">{{option.option}}</option>
               </select>
             </div>
@@ -37,10 +37,10 @@
           </div>
           <div class="text-medium">
             <div>
-              <label class="pointer"><input (click)="createWeeklyGraph('bar')" type="radio" name="chartType" checked>Bar Graph</label>
+              <label class="pointer"><input (click)="createWeeklyGraph('bar', graphWeekFilter)" type="radio" name="chartType" checked>Bar Graph</label>
             </div>
             <div>
-              <label class="pointer"><input (click)="createWeeklyGraph('line')" type="radio" name="chartType">Line Graph</label>
+              <label class="pointer"><input (click)="createWeeklyGraph('line', graphWeekFilter)" type="radio" name="chartType">Line Graph</label>
             </div>
           </div>
         </div>
@@ -53,18 +53,18 @@
           </div>
           <div class="text-medium">
             <div>
-              <label class="pointer"><input type="radio" name="pieChartType" checked> {{ htmlLabel['TEXT']['CATEGORY'] }} </label>
+              <label class="pointer"><input type="radio" (click)="createPieChart(expenseDataFromAPI, 'category')" name="pieChartType" checked> {{ htmlLabel['TEXT']['CATEGORY'] }} </label>
             </div>
             <div>
-              <label class="pointer"><input type="radio" name="pieChartType"> {{ htmlLabel['TEXT']['MODE'] }}</label>
+              <label class="pointer"><input type="radio" (click)="createPieChart(expenseDataFromAPI, 'mode')" name="pieChartType"> {{ htmlLabel['TEXT']['MODE'] }}</label>
             </div>
           </div>
         </div>
      </div>
 
      <!-- bottom section -->
-    <app-expense-table 
+    <app-expense-table *ngIf="expenseTableData.data.length > 0"
         [inputData]="expenseTableData">
     </app-expense-table>
 </div>
-
+<app-loading-spinner *ngIf="loadSpinner"></app-loading-spinner>
