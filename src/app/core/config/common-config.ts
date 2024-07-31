@@ -8,6 +8,7 @@ export const validationLimit = {
 export const validationRegex = {
     NAME_REGEX:  /^[a-zA-Z]+[a-zA-Z ]*$/,
     PHONE_NUMBER_REGEX: /^\d{10}$/,
+    AMOUNT_REGEX: /^\d+(\.\d{1,2})?$/
 }
 
 
@@ -28,6 +29,11 @@ export const messages = {
         PHONE_NUMBER_REQUIRED: "Phone number is required",
         PHONE_NUMBER_INVALID: "Phone number is invalid",
         ADDRESS_REQUIRED: "Address is required",
+        EXPENSE_REQUIRED: "Expense is required",
+        EXPENSE_INVALID: "Expense is invalid",
+        AMOUNT_REQUIRED: "Amount is required",
+        AMOUNT_INVALID: "Amount is invalid",
+        DATE_REQUIRED: "Date is required",
 
         
     },
@@ -51,7 +57,10 @@ export const htmlLabel = {
         TOTAL_EXPENSE: "Total Expenese",
         THIS_MONTH: "This month",
         THIS_WEEK: "This week",
-        TODAY: "Today"
+        TODAY: "Today",
+        EXPENSE: "Expense",
+        AMOUNT: "Amount",
+        DATE: "Date"
 
     },
     BUTTON: {
@@ -66,6 +75,8 @@ export const htmlLabel = {
         ENTER_LAST_NAME: "Enter Last Name",
         ENTER_PHONE: "Enter Phone Number",
         ENTER_ADDRESS: "Enter Address",
+        ENTER_EXPENSE: "Enter Expense",
+        ENTER_AMOUNT: "Enter Amount"
     },
 
     TABLE: {

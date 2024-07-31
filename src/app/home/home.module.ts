@@ -10,6 +10,7 @@ import { RoundPipe } from '../core/pipes/round.pipe';
 import { ExpenseTableComponent } from '../core/components/expense-table/expense-table.component';
 import { LoadingSpinnerComponent } from "../core/components/loading-spinner/loading-spinner.component";
 import { FormsModule } from '@angular/forms';
+import { AddExpenseFormComponent } from '../core/components/add-expense-form/add-expense-form.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     RoundPipe,
     ExpenseTableComponent,
     LoadingSpinnerComponent,
-    FormsModule
+    FormsModule,
+    AddExpenseFormComponent
 ]
 })
 export class HomeModule { }
