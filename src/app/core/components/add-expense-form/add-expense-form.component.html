@@ -1,0 +1,43 @@
+<div class="add-expense-form-main">
+    <div class="header">
+        <div class="align-center text-medium weight-600">
+            Add Expense
+        </div>
+    </div>
+    <div class="form"  [formGroup]="addExpenseForm">
+        <div class="form-container">
+            <div>
+                <label for="expenseName" class="text-small weight-600">{{ htmlLabel['TEXT']['EXPENSE'] }}</label>
+                <input class="form-control form-control-lg" id="expenseName" [placeholder]="htmlLabel['PLACEHOLDER']['ENTER_EXPENSE']" type="text" formControlName="name">
+                <span *ngIf="addExpenseForm.controls['name'].touched && addExpenseForm.controls['name'].hasError('required')" class="input-error">{{ validationMessages['EXPENSE_REQUIRED'] }}</span>
+                <span *ngIf="addExpenseForm.controls['name'].touched && addExpenseForm.controls['name'].hasError('invalidName')" class="input-error">{{ validationMessages['EXPENSE_INVALID'] }}</span>
+            </div>
+            <div>
+                <label for="amount" class="text-small weight-600">{{ htmlLabel['TEXT']['AMOUNT'] }}</label>
+                <input class="form-control form-control-lg" id="amount" [placeholder]="htmlLabel['PLACEHOLDER']['ENTER_AMOUNT']" type="text" formControlName="amount">
+                <span *ngIf="addExpenseForm.controls['amount'].touched && addExpenseForm.controls['amount'].hasError('required')" class="input-error">{{ validationMessages['AMOUNT_REQUIRED'] }}</span>
+                <span *ngIf="addExpenseForm.controls['amount'].touched && addExpenseForm.controls['amount'].hasError('invalidAmount')" class="input-error">{{ validationMessages['AMOUNT_INVALID'] }}</span>
+            </div>
+            <div>
+                <label for="mode" class="text-small weight-600">{{ htmlLabel['TEXT']['MODE'] }}</label>
+                <select  id="mode" class="text-small form-control form-control-lg" formControlName="mode">
+                    <option [defaultSelected]="true" value="1">Casah</option>
+                </select>
+            </div>
+            <div>
+                <label for="category" class="text-small weight-600">{{ htmlLabel['TEXT']['CATEGORY'] }}</label>
+                <select id="category" class="text-small form-control form-control-lg" formControlName="category">
+                    <option value="1">Casah</option>
+                </select>
+            </div>
+            <div>
+                <label for="date" class="text-small weight-600">{{ htmlLabel['TEXT']['DATE'] }}</label>
+                <input id="date" max="{{ today | date: 'yyyy-MM-dd'}}" class="form-control form-control-lg" id="expenseName" type="date" formControlName="date">
+                <span *ngIf="addExpenseForm.controls['date'].touched && addExpenseForm.controls['date'].hasError('required')" class="input-error">{{ validationMessages['DATE_REQUIRED'] }}</span>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <button (click)="addExpense()" class="btn btn-primary mt-4">Add Expense</button>
+        </div>
+    </div>
+</div>

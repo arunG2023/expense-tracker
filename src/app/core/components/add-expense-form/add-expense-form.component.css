@@ -1,0 +1,47 @@
+.add-expense-form-main{
+    width: 100%;
+    background-color: var(--top-section-card-background);
+    border: 1px solid var(--top-section-card-border-color);
+    box-shadow: var(--top-section-card-shadow);
+    border-radius: 20px;
+    padding: 30px 25px;
+}
+
+.add-expense-form-main > div.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+
+.text-small {
+    color: var(--sidebar-item-text-color);
+}
+
+.text-big,
+.text-medium {
+    color: var(--top-section-card-amount-text-color);
+}
+
+input[type="text"], input[type="date"], .form-control-lg{
+    background-color: var(--backgroud-color);
+    color: var(--top-section-card-amount-text-color);
+    max-width: 500px;
+}
+
+
+
+
+.form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+    row-gap: 25px;
+}
+
+
+@media screen and (max-width: 600px) {
+    .form-container {
+        grid-template-columns: 1fr;
+    }
+}
