@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { apiUrl } from '../config/api-url-config';
+import { AddExpense } from '../interfaces/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,18 @@ export class ExpenseService {
 
   public getExpenseData(){
     return this._userExpenseData;
+  }
+
+  public getCategoryData(): Observable<any> {
+    return this._http.get(apiUrl.GET_ALL_CATEGORIES);
+  }
+
+  public getModeDate(): Observable<any> {
+    return this._http.get(apiUrl.GET_ALL_MODE);
+  }
+
+
+  public addExpense(data: AddExpense): Observable<any> {
+    return this._http.post(apiUrl.ADD_EXPENSE, data);
   }
 } 

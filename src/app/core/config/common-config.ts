@@ -34,8 +34,8 @@ export const messages = {
         AMOUNT_REQUIRED: "Amount is required",
         AMOUNT_INVALID: "Amount is invalid",
         DATE_REQUIRED: "Date is required",
-
-        
+        MODE_REQUIRED: "Mode is required",
+        CATEGORY_REQUIRED: "Category is required",
     },
     SUCCESS: {
 
@@ -76,7 +76,9 @@ export const htmlLabel = {
         ENTER_PHONE: "Enter Phone Number",
         ENTER_ADDRESS: "Enter Address",
         ENTER_EXPENSE: "Enter Expense",
-        ENTER_AMOUNT: "Enter Amount"
+        ENTER_AMOUNT: "Enter Amount",
+        SELECT_MODE: "Select a mode",
+        SELECT_CATEGORY: "Select a category"
     },
 
     TABLE: {

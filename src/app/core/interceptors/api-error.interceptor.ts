@@ -30,7 +30,7 @@ export class ApiErrorInterceptor implements HttpInterceptor {
               queryParams: { code: 404 }
             });
           }
-          else if(error.status == 500 || error.status == 0){
+          else if(error.status == 500 || error.status == 0 || error.status == 400){
             this._router.navigate([routesConfig.ERROR_PAGE], {
               queryParams: { code: 500 }
             });
