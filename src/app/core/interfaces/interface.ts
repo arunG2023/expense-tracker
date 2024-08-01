@@ -43,3 +43,11 @@ export interface ErrorData {
         dark_theme: string
     }
 }
+
+export interface AddExpense {
+    name: string;
+    amount: string;
+    modeId: string;
+    categoryId: string;
+    date: string
+}
