@@ -6,6 +6,7 @@ import { SnackBarComponent } from 'src/app/core/components/snack-bar/snack-bar.c
 import { htmlLabel, messages, snackBar, validationLimit } from 'src/app/core/config/common-config';
 import { routesConfig } from 'src/app/core/config/routes-config';
 import { Login } from 'src/app/core/interfaces/interface';
+import { LoadingSpinnerService } from 'src/app/core/services/loading-spinner.service';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -31,13 +32,12 @@ export class LoginComponent implements OnInit {
   // Subject to destroy
   private _ngUnsubscribe: Subject<void> = new Subject();
 
-  // Spinner 
-  public loadSpinner: boolean = false;
 
   constructor(
     private _userService: UserService,
     private _router: Router,
-    private _snackBarService: SnackbarService
+    private _snackBarService: SnackbarService,
+    private _spinnerService: LoadingSpinnerService
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
 
   public loginUser(){
     if(this.loginForm.valid){
-        this.loadSpinner = true;
+        this._spinnerService.startSpinner();
         this._loginData = {
           email: this.loginForm.value.email,
           password: this.loginForm.value.password
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
         .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
         .subscribe(
           res => {
-            this.loadSpinner = false;
+            this._spinnerService.stopSpinner();
             this._snackBarService.setData({
               message: res.message,
               type: snackBar.TYPE.SUCCESS,
@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
             this._router.navigate([routesConfig.HOME]);
           },
           err => {
-            this.loadSpinner = false;
+            this._spinnerService.stopSpinner();
             if(err.error.message){
               this._snackBarService.setData({
                 message: err.error.message,

@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/internal/Subject';
 import { htmlLabel, messages, snackBar, validationLimit, validationRegex } from 'src/app/core/config/common-config';
 import { routesConfig } from 'src/app/core/config/routes-config';
 import { RegisterUser } from 'src/app/core/interfaces/interface';
+import { LoadingSpinnerService } from 'src/app/core/services/loading-spinner.service';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -31,13 +32,12 @@ export class RegisterComponent implements OnInit {
   // Subject to destroy
   private _ngUnsubscribe: Subject<void> = new Subject();
 
-  // loading indicator
-  public loadSpinner: boolean = false;
 
   constructor(
         private _userService: UserService,
         private _router: Router,
-        private _snackBarService: SnackbarService
+        private _snackBarService: SnackbarService,
+        private _spinnerService: LoadingSpinnerService
   ) { 
     this.registerForm = new FormGroup({
       firstName: new FormControl('', [Validators.required, Validators.pattern(validationRegex.NAME_REGEX)]),
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
 
   public createUser(){
     if(this.registerForm.valid){
-      this.loadSpinner = true;
+     this._spinnerService.startSpinner();
       let userData: RegisterUser = {
         firstName: this.registerForm.value.firstName,
         lastName: this.registerForm.value.lastName,
@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit {
       this._userService.createUser(userData)
         .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
         .subscribe(res => {
-          this.loadSpinner = false;
+          this._spinnerService.stopSpinner();
           this._snackBarService.setData({
             message: res.message,
             type: snackBar.TYPE.SUCCESS,
@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit {
           this._router.navigate([this.routes.USER, this.routes.LOGIN]);
         },
         err => {
-          this.loadSpinner = false;
+          this._spinnerService.stopSpinner();
           if(err.error.message){
             this._snackBarService.setData({
               message: err.error.message,

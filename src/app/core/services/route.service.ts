@@ -8,14 +8,23 @@ import { SideBar } from '../interfaces/interface';
 })
 export class RouteService {
   public path: string = location.pathname.split('/')[2];
-  public routeTitle$: BehaviorSubject<any> = new BehaviorSubject(sideBarRoutes.find(route => route.path == this.path));
+  public routeTitle$: BehaviorSubject<any> = new BehaviorSubject(this.findRoute(this.path));
   public routeTitle: Observable<SideBar> = this.routeTitle$.asObservable();
 
   public setTitle(route: SideBar){
       this.routeTitle$.next(route);
   }
 
+
   constructor() { 
-    console.log(location.pathname.split('/')[2])
+  }
+
+  public findRoute(path: string): SideBar{
+    let sideBar: any = sideBarRoutes.find(route => route.path == path);
+    if(sideBar){
+      return sideBar;
+    }
+    return sideBarRoutes[0];
+
   }
 }

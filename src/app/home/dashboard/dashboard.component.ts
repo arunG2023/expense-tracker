@@ -4,6 +4,8 @@ import Chart, { ChartTypeRegistry } from 'chart.js/auto';
 import { ExpenseTableData } from 'src/app/core/interfaces/interface';
 import { ExpenseService } from 'src/app/core/services/expense.service';
 import { Subject, takeUntil } from 'rxjs';
+import { RouteService } from 'src/app/core/services/route.service';
+import { routesConfig } from 'src/app/core/config/routes-config';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +26,6 @@ export class DashboardComponent implements OnInit {
     data: []
   }
 
-  public loadSpinner: boolean = false;
 
   // Subject to destroy
   private _ngUnsubscribe: Subject<void> = new Subject();
@@ -33,10 +34,12 @@ export class DashboardComponent implements OnInit {
 
   public graphWeekFilter: string = graphFilter[0].option;
   constructor(
-        private _expenseService: ExpenseService
+        private _expenseService: ExpenseService,
+        private _routeService: RouteService
   ) { }
 
   ngOnInit(): void {
+    this._routeService.setTitle(this._routeService.findRoute(routesConfig.DASHBOARD));
   
     this._expenseService.getExpenseData()
       .pipe(takeUntil(this._ngUnsubscribe.asObservable()))

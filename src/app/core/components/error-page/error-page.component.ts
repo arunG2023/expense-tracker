@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { routesConfig } from '../../config/routes-config';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { UserService } from '../../services/user.service';
+import { LoadingSpinnerService } from '../../services/loading-spinner.service';
 
 @Component({
   selector: 'app-error-page',
@@ -15,7 +16,6 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./error-page.component.css']
 })
 export class ErrorPageComponent implements OnInit {
-  public loadSpinner: boolean = false;
 
   public errorData: ErrorData = errorPageConfig.INTERNAL_SERVER_ERROR;
 
@@ -23,12 +23,13 @@ export class ErrorPageComponent implements OnInit {
       private _activatedRoute: ActivatedRoute,
       private _router: Router,
       private _location: Location,
-      private _userService: UserService
+      private _userService: UserService,
+      private _spinnerSevice: LoadingSpinnerService
   ) { }
 
   ngOnInit(): void {
     this._activatedRoute.queryParams.subscribe(params => {
-      
+      this._spinnerSevice.stopSpinner();
       if(params['code'] == 403){
         this.errorData = errorPageConfig.FORBIDDEN;
       }
@@ -46,10 +47,10 @@ export class ErrorPageComponent implements OnInit {
 
 
   public retry(errorCode: string){
-    this.loadSpinner = true;
+    this._spinnerSevice.startSpinner();
     if(errorCode == '500'){
       setTimeout(() => {
-        this.loadSpinner = false;
+        this._spinnerSevice.stopSpinner();
         if(this._userService.isLoggedIn()){
           this._router.navigate([routesConfig.HOME,routesConfig.DASHBOARD]);
         }
@@ -60,13 +61,13 @@ export class ErrorPageComponent implements OnInit {
     }
     else if(errorCode == '404'){
       setTimeout(() => {
-        this.loadSpinner = false;
+        this._spinnerSevice.stopSpinner();
         this._location.back();
       }, 1000)
       
     }
     else{
-      this.loadSpinner = false;
+      this._spinnerSevice.stopSpinner();
       this._router.navigate([routesConfig.USER,routesConfig.LOGIN])
     }
   }
