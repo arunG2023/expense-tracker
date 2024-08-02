@@ -11,6 +11,7 @@ import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.comp
 import { AddExpense } from '../../interfaces/interface';
 import { Router } from '@angular/router';
 import { routesConfig } from '../../config/routes-config';
+import { LoadingSpinnerService } from '../../services/loading-spinner.service';
 
 @Component({
   selector: 'app-add-expense-form',
@@ -26,8 +27,6 @@ import { routesConfig } from '../../config/routes-config';
 export class AddExpenseFormComponent implements OnInit {
   // Subject to destroy
   private _ngUnsubscribe: Subject<void> = new Subject();
-
-  public loadSpinner: boolean = false;
 
   public addExpenseForm: FormGroup;
 
@@ -46,7 +45,8 @@ export class AddExpenseFormComponent implements OnInit {
   constructor(
     private _snackBarService: SnackbarService,
     private _expenseService: ExpenseService,
-    private _router: Router
+    private _router: Router,
+    private _spinnerService: LoadingSpinnerService
   ) {
     this.addExpenseForm = new FormGroup({
       name: new FormControl('', [Validators.required, expenseNameCheck()]),
@@ -84,18 +84,17 @@ export class AddExpenseFormComponent implements OnInit {
         modeId: this.addExpenseForm.value.mode,
         categoryId: this.addExpenseForm.value.category
       }
-      this.loadSpinner = true;
+      this._spinnerService.startSpinner();
       this._expenseService.addExpense(payload)
         .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
-        .subscribe(res => {
+        .subscribe(respone => {
           this._expenseService.getExpenseDataFromAPI()
             .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
             .subscribe(res => {
-              this.loadSpinner = false;
               this._expenseService.setExpenseData(res);
-              this.loadSpinner = false;
+              this._spinnerService.stopSpinner();
               this._snackBarService.setData({
-                message: res.message,
+                message: respone.message,
                 type: snackBar.TYPE.SUCCESS,
                 time: snackBar.TIME.MIN
               });
@@ -104,7 +103,7 @@ export class AddExpenseFormComponent implements OnInit {
             })
         }
           , err => {
-            this.loadSpinner = false;
+            this._spinnerService.stopSpinner();
             if (err.error.message) {
               this._snackBarService.setData({
                 message: err.error.message,
