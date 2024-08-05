@@ -12,6 +12,11 @@ export class SnackbarService {
   constructor() { }
 
   public setData(data: SnackBar){
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    })
     this.snackBarDataSubject.next(data)
   }
 

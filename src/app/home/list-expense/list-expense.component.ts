@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { htmlLabel, validationLimit } from 'src/app/core/config/common-config';
 import { ExpenseTableData } from 'src/app/core/interfaces/interface';
 import { ExpenseService } from 'src/app/core/services/expense.service';
@@ -21,6 +21,8 @@ export class ListExpenseComponent implements OnInit {
   // Subject to destroy
   private _ngUnsubscribe: Subject<void> = new Subject();
 
+  public refreshData: BehaviorSubject<any> = new BehaviorSubject(null);
+
   constructor(
           private _expenseService: ExpenseService
   ) { }
@@ -31,6 +33,7 @@ export class ListExpenseComponent implements OnInit {
     .subscribe(expenseData => {
       if(expenseData && expenseData.data.allExpenses.length > 0){
         this.expenseTableData.data = expenseData.data.allExpenses;
+        this.refreshData.next(expenseData.data.allExpenses);
       }
     })
   }

@@ -1,3 +1,5 @@
 <div class="list-expense-main" *ngIf="expenseTableData.data.length > 0">
-    <app-expense-table [inputData]="expenseTableData"></app-expense-table>
+    <app-expense-table 
+                        [inputData]="expenseTableData"
+                        [refreshData]="refreshData.asObservable()"></app-expense-table>
 </div>

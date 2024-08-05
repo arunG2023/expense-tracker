@@ -1,0 +1,29 @@
+.dialog-main{
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(128, 122, 122, 0.3);
+    font-size: 20px;
+}
+
+.dialog-box{
+    padding: 20px;
+    background-color: white;
+    max-width: 300px;
+}
+
+.confirm-button{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-top: 5px;
+}
+
+.btn-success{
+    background-color: rgb(171, 26, 26);
+}
