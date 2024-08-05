@@ -10,6 +10,7 @@ import { NavigationModule } from './core/modules/navigation/navigation/navigatio
 import { ApiErrorInterceptor } from './core/interceptors/api-error.interceptor';
 import { ApiHeaderInterceptor } from './core/interceptors/api-header.interceptor';
 import { LoadingSpinnerComponent } from "./core/components/loading-spinner/loading-spinner.component";
+import { DialogBoxComponent } from "./core/components/dialog-box/dialog-box.component";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LoadingSpinnerComponent } from "./core/components/loading-spinner/loadi
     HttpClientModule,
     SnackBarComponent,
     NavigationModule,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    DialogBoxComponent
 ],
   providers: [
     {

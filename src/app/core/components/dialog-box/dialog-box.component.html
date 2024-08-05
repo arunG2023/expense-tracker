@@ -1,0 +1,15 @@
+<div class="dialog-main" *ngIf="showDialog">
+    <div class="dialog-box">
+        <div class="weight-600">
+            Are you sure?
+        </div>
+        <hr color="white">
+        <div >
+            Do you want to delete : Expense name
+        </div>
+        <div class="confirm-button">
+            <button (click)="deleteExpense()" class="btn btn-success mr-2">Yes</button>
+            <button (click)="closeDialog()" class="btn btn-danger">No</button>
+        </div>
+    </div>
+</div>

@@ -51,3 +51,9 @@ export interface AddExpense {
     categoryId: string;
     date: string
 }
+
+export interface DialogBox {
+    isShow: boolean;
+    text?: string;
+    data?: any
+}

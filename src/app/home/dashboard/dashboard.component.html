@@ -64,6 +64,7 @@
 
      <!-- bottom section -->
     <app-expense-table *ngIf="expenseTableData.data.length > 0"
-        [inputData]="expenseTableData">
+        [inputData]="expenseTableData"
+        [refreshData]="refreshData.asObservable()">
     </app-expense-table>
 </div>

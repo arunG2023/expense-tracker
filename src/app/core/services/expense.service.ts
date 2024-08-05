@@ -37,8 +37,15 @@ export class ExpenseService {
     return this._http.get(apiUrl.GET_ALL_MODE);
   }
 
-
   public addExpense(data: AddExpense): Observable<any> {
     return this._http.post(apiUrl.ADD_EXPENSE, data);
+  }
+
+  public deleteExpense(id: string): Observable<any> {
+    return this._http.delete(apiUrl.DELETE_EXPENSE, {
+      body: {
+        id: id
+      }
+    });
   }
 } 

@@ -3,7 +3,7 @@ import { chartConfig, graphFilter, htmlLabel } from 'src/app/core/config/common-
 import Chart, { ChartTypeRegistry } from 'chart.js/auto';
 import { ExpenseTableData } from 'src/app/core/interfaces/interface';
 import { ExpenseService } from 'src/app/core/services/expense.service';
-import { Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { RouteService } from 'src/app/core/services/route.service';
 import { routesConfig } from 'src/app/core/config/routes-config';
 
@@ -33,6 +33,8 @@ export class DashboardComponent implements OnInit {
   public expenseDataFromAPI: any; 
 
   public graphWeekFilter: string = graphFilter[0].option;
+
+  public refreshData: BehaviorSubject<any> = new BehaviorSubject(null);
   constructor(
         private _expenseService: ExpenseService,
         private _routeService: RouteService
@@ -49,10 +51,16 @@ export class DashboardComponent implements OnInit {
           this.expenseDataFromAPI = data.data;
           this.createPieChart(data.data, 'category');
           this.createWeeklyGraph('bar', graphFilter[0].option);
-          this.expenseTableData.data = data.data.allExpenses.slice(data.data.allExpenses.length - 10, data.data.allExpenses.length).reverse();
+          this.expenseTableData.data = this._getRecentExpense(data);
+          this.refreshData.next(this._getRecentExpense(data));
         }
       });
    
+  }
+
+
+  private _getRecentExpense(data: any){
+    return data.data.allExpenses.slice(data.data.allExpenses.length - 10, data.data.allExpenses.length).reverse()
   }
 
   ngOnDestroy(): void{
