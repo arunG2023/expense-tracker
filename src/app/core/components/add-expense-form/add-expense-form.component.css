@@ -1,4 +1,4 @@
-.add-expense-form-main{
+.add-expense-form-main {
     width: 100%;
     background-color: var(--top-section-card-background);
     border: 1px solid var(--top-section-card-border-color);
@@ -7,7 +7,7 @@
     padding: 30px 25px;
 }
 
-.add-expense-form-main > div.header {
+.add-expense-form-main>div.header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
@@ -23,7 +23,9 @@
     color: var(--top-section-card-amount-text-color);
 }
 
-input[type="text"], input[type="date"], .form-control-lg{
+input[type="text"],
+input[type="date"],
+.form-control-lg {
     background-color: var(--backgroud-color);
     color: var(--top-section-card-amount-text-color);
     max-width: 500px;
@@ -44,4 +46,50 @@ input[type="text"], input[type="date"], .form-control-lg{
     .form-container {
         grid-template-columns: 1fr;
     }
+}
+
+
+
+/* Custom Select */
+.custom-select-icon {
+    position: absolute;
+
+}
+/* 
+.custom-select-dev {
+    display: flex;
+} */
+
+.custom-select-dev-option{
+    z-index: 10;
+    position: absolute;
+    margin-top: 5px;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: var(--backgroud-color);
+    color: var(--top-section-card-amount-text-color);
+    border: 1px solid #ced4da;
+    width: 284px;
+    height: 150px;
+    overflow-y: scroll;
+}
+
+.custom-select-dev-option div{
+    margin-bottom: 5px;
+    padding-left: 5px;
+    /* border-bottom: 1px solid #ced4da; */
+}
+
+.custom-select-dev-option div:hover{
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+}
+
+.show{
+    display: block; 
+}
+
+.hide{
+    display: none;
 }

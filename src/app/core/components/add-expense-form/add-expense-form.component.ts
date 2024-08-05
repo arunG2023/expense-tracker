@@ -81,8 +81,8 @@ export class AddExpenseFormComponent implements OnInit {
         name: this.addExpenseForm.value.name,
         amount: this.addExpenseForm.value.amount,
         date: new Date(this.addExpenseForm.value.date).toDateString(),
-        modeId: this.addExpenseForm.value.mode,
-        categoryId: this.addExpenseForm.value.category
+        modeId: this._getModeIdFromMode(this.addExpenseForm.value.mode),
+        categoryId: this._getCategoryIdFromCategory(this.addExpenseForm.value.category)
       }
       this._spinnerService.startSpinner();
       this._expenseService.addExpense(payload)
@@ -124,6 +124,34 @@ export class AddExpenseFormComponent implements OnInit {
     }
   }
 
+  
+  public showOption1: boolean = false;
+  public showOption2: boolean = false;
+  public hover1(){
+    this.showOption1 = !this.showOption1;
+  }
+
+  public hover2(){
+    this.showOption2 = !this.showOption2;
+  }
+
+  public onModeSelect(mode: string){
+    this.addExpenseForm.controls['mode'].setValue(mode);
+    this.hover1();
+  }
+
+  public onCategorySelect(category: string){
+    this.addExpenseForm.controls['category'].setValue(category);
+    this.hover2();
+  }
+
+  private _getModeIdFromMode(name: string){
+    return this.modeOption.find(mode => name == mode.mode).modeId;
+  }
+
+  private _getCategoryIdFromCategory(name: string){
+    return this.categoryOption.find(category => name == category.category).categoryId;
+  }
 }
 
 

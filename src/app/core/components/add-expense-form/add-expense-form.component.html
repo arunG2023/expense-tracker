@@ -20,19 +20,24 @@
             </div>
             <div>
                 <label for="mode" class="text-small weight-600">{{ htmlLabel['TEXT']['MODE'] }}</label>
-                <select  id="mode"  class="text-small form-control form-control-lg" formControlName="mode">
-                    <option value="">{{htmlLabel['PLACEHOLDER']['SELECT_MODE']}}</option>
-                    <option *ngFor="let option of modeOption" [value]="option.modeId">{{option.mode}}</option>
-                </select>
-                <span *ngIf="addExpenseForm.controls['mode'].touched && addExpenseForm.controls['mode'].hasError('required')" class="input-error">{{ validationMessages['MODE_REQUIRED'] }}</span>
+                <div class="custom-select-dev">
+                    <input id="mode" (click)="hover1()" (keypress)="hover1()" readonly class="form-control form-control-lg" [placeholder]="htmlLabel['PLACEHOLDER']['SELECT_MODE']" type="text" autocomplete="off" formControlName="mode">
+                    <!-- <span class="custom-select-icon" >^</span> -->
+                     <div [ngClass]="(showOption1)? 'show' : 'hide'" class="custom-select-dev-option">
+                        <div *ngFor="let option of modeOption" (click)="onModeSelect(option.mode)" >{{option.mode}}</div>
+                     </div>
+                    <span *ngIf="addExpenseForm.controls['mode'].touched && addExpenseForm.controls['mode'].hasError('required')" class="input-error">{{ validationMessages['MODE_REQUIRED'] }}</span>
+                </div>
             </div>
             <div>
                 <label for="category" class="text-small weight-600">{{ htmlLabel['TEXT']['CATEGORY'] }}</label>
-                <select id="category" class="text-small form-control form-control-lg" formControlName="category">
-                    <option value="">{{htmlLabel['PLACEHOLDER']['SELECT_CATEGORY']}}</option>
-                    <option *ngFor="let option of categoryOption" [value]="option.categoryId">{{option.category}}</option>
-                </select>
-                <span *ngIf="addExpenseForm.controls['category'].touched && addExpenseForm.controls['category'].hasError('required')" class="input-error">{{ validationMessages['CATEGORY_REQUIRED'] }}</span>
+                <div class="custom-select-dev">
+                    <input id="category" (click)="hover2()" (keypress)="hover2()" readonly class="form-control form-control-lg" [placeholder]="htmlLabel['PLACEHOLDER']['SELECT_CATEGORY']" type="text" autocomplete="off" formControlName="category">
+                     <div [ngClass]="(showOption2)? 'show' : 'hide'" class="custom-select-dev-option">
+                        <div *ngFor="let option of categoryOption" (click)="onCategorySelect(option.category)">{{option.category}}</div>
+                     </div>
+                     <span *ngIf="addExpenseForm.controls['category'].touched && addExpenseForm.controls['category'].hasError('required')" class="input-error">{{ validationMessages['CATEGORY_REQUIRED'] }}</span>
+                </div>
             </div>
             <div>
                 <label for="date" class="text-small weight-600">{{ htmlLabel['TEXT']['DATE'] }}</label>
