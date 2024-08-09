@@ -3,24 +3,30 @@ import { CommonModule } from '@angular/common';
 import { DialogService } from '../../services/dialog.service';
 import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs';
-import { DialogBox } from '../../interfaces/interface';
+import { DialogBox, Modal } from '../../interfaces/interface';
 import { ExpenseService } from '../../services/expense.service';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { LoadingSpinnerService } from '../../services/loading-spinner.service';
 import { SnackbarService } from '../../services/snackbar.service';
 import { messages, snackBar } from '../../config/common-config';
+import { ModalService } from '../../services/modal.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dialog-box',
   standalone: true,
   imports: [
             CommonModule,
-            LoadingSpinnerComponent],
+            LoadingSpinnerComponent,
+            FormsModule],
   templateUrl: './dialog-box.component.html',
   styleUrls: ['./dialog-box.component.css']
 })
 export class DialogBoxComponent implements OnInit {
   public showDialog: boolean = false;
+  public showAddCategory: boolean = false;
+
+  public categoryName: string = '';
 
   
   // Subject to destroy
@@ -32,7 +38,8 @@ export class DialogBoxComponent implements OnInit {
     private _dialogService: DialogService,
     private _expenseService: ExpenseService,
     private _spinnerService: LoadingSpinnerService,
-    private _snackBarService: SnackbarService
+    private _snackBarService: SnackbarService,
+    private _modalService: ModalService
   ) { }
 
   ngOnInit(): void {
@@ -47,7 +54,16 @@ export class DialogBoxComponent implements OnInit {
             this.showDialog = false;
           }
         })
-      }
+    this._checkForModal();
+  }
+
+  private _checkForModal(){
+      this._modalService.modalData$
+          .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
+          .subscribe((data: Modal) => {
+            this.showAddCategory = data.isAddCategory;
+          })
+  }
 
   ngOnDestroy(): void{
     this._ngUnsubscribe.next();
@@ -84,6 +100,25 @@ export class DialogBoxComponent implements OnInit {
         message: messages.ERROR.SERVER_ERROR,
         type: snackBar.TYPE.ERROR,
         time: 5
+      });
+    }
+  }
+
+
+  // Modal
+  public closeModal(){
+    this._modalService.hideModal();
+  }
+
+  public addCategory(){
+    if(this.categoryName){
+
+    }
+    else{
+      this._snackBarService.setData({
+        message: messages.ERROR.FILL_ALL,
+        type: snackBar.TYPE.ERROR,
+        time: snackBar.TIME.MIN
       });
     }
   }

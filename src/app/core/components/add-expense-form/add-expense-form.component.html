@@ -35,6 +35,7 @@
                     <input id="category" (click)="hover2()" (keypress)="hover2()" readonly class="form-control form-control-lg" [placeholder]="htmlLabel['PLACEHOLDER']['SELECT_CATEGORY']" type="text" autocomplete="off" formControlName="category">
                      <div [ngClass]="(showOption2)? 'show' : 'hide'" class="custom-select-dev-option">
                         <div *ngFor="let option of categoryOption" (click)="onCategorySelect(option.category)">{{option.category}}</div>
+                        <div (click)="openAddCategoryModal()" class="link">Add New +</div>
                      </div>
                      <span *ngIf="addExpenseForm.controls['category'].touched && addExpenseForm.controls['category'].hasError('required')" class="input-error">{{ validationMessages['CATEGORY_REQUIRED'] }}</span>
                 </div>

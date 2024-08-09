@@ -12,6 +12,7 @@ import { AddExpense } from '../../interfaces/interface';
 import { Router } from '@angular/router';
 import { routesConfig } from '../../config/routes-config';
 import { LoadingSpinnerService } from '../../services/loading-spinner.service';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-add-expense-form',
@@ -46,7 +47,8 @@ export class AddExpenseFormComponent implements OnInit {
     private _snackBarService: SnackbarService,
     private _expenseService: ExpenseService,
     private _router: Router,
-    private _spinnerService: LoadingSpinnerService
+    private _spinnerService: LoadingSpinnerService,
+    private _modalService: ModalService
   ) {
     this.addExpenseForm = new FormGroup({
       name: new FormControl('', [Validators.required, expenseNameCheck()]),
@@ -151,6 +153,12 @@ export class AddExpenseFormComponent implements OnInit {
 
   private _getCategoryIdFromCategory(name: string){
     return this.categoryOption.find(category => name == category.category).categoryId;
+  }
+
+
+  public openAddCategoryModal(){
+    this._modalService.showModal({isAddCategory: true, isUpdateExepense: false});
+    this.hover2();
   }
 }
 
