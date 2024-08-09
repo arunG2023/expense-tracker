@@ -57,3 +57,10 @@ export interface DialogBox {
     text?: string;
     data?: any
 }
+
+
+export interface Modal {
+    isAddCategory: boolean;
+    isUpdateExepense: boolean;
+    data?: any
+}
