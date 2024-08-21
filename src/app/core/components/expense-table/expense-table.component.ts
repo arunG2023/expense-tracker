@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ExpenseTableData } from '../../interfaces/interface';
-import { htmlLabel } from '../../config/common-config';
+import { ExpenseTableData, GetPDF } from '../../interfaces/interface';
+import { fileConfig, htmlLabel } from '../../config/common-config';
 import { RoundPipe } from '../../pipes/round.pipe';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -9,6 +9,8 @@ import { TruncateStringPipe } from '../../pipes/truncate-string.pipe';
 import { DialogService } from '../../services/dialog.service';
 import { ExpenseService } from '../../services/expense.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
+import { FileService } from '../../services/file.service';
+import { LoadingSpinnerService } from '../../services/loading-spinner.service';
 
 @Component({
   selector: 'app-expense-table',
@@ -26,6 +28,7 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 export class ExpenseTableComponent implements OnInit {
   // HTML Label:
   public htmlLabel: any = htmlLabel;
+  public fileConfig: any = fileConfig;
 
   // Subject to destroy
   private _ngUnsubscribe: Subject<void> = new Subject();
@@ -44,7 +47,9 @@ export class ExpenseTableComponent implements OnInit {
 
   constructor(
       private _dialogService: DialogService,
-      private _expenseSerice: ExpenseService
+      private _expenseSerice: ExpenseService,
+      private _fileService: FileService,
+      private _spinnerService: LoadingSpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -59,8 +64,12 @@ export class ExpenseTableComponent implements OnInit {
       this.expenseTableData = this.inputData.data.filter((expense): boolean | undefined => {
         if (this.inputData.data.length > 0) {
           for (const key in expense) {
-            const value = expense[key].toString().toLowerCase();
-            if (value.includes(searchText.toLowerCase())) return true;
+            // Filter based on the below keys
+            if(["name", "category","amount","mode","date"].includes(key)){
+              const value = expense[key].toString().toLowerCase();
+              if (value.includes(searchText.toLowerCase())) return true;
+            }
+            
           }
         }
         return false;
@@ -72,9 +81,11 @@ export class ExpenseTableComponent implements OnInit {
   }
 
 
-  public deleteExpense(id: string){
+  public deleteExpense(id: string, name: string){
     this._dialogService.showDialog({isShow: true, data: {
-      id: id}})
+      id: id,
+      name: name
+    }})
   }
   
 
@@ -85,4 +96,31 @@ export class ExpenseTableComponent implements OnInit {
     this.page = thisPage
   }
 
+
+  // Getting Pdf Files:
+  public getPdfFile(){
+    this._spinnerService.startSpinner();
+    let data: GetPDF = {
+      "type": "1",
+      "data": {
+        "title": fileConfig.FILE_TITLE,
+        "data": this.expenseTableData
+      }
+    }
+    this._fileService.getPdf(data).pipe(
+      takeUntil(this._ngUnsubscribe.asObservable()))
+      .subscribe(blob => {
+        this._spinnerService.stopSpinner();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileConfig.FILE_NAME;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+  })
+
+  }
 }
+

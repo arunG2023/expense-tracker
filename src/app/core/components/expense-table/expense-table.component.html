@@ -13,7 +13,7 @@
         </div>
       </div>
       <div>
-        <div class="download-icon">
+        <div (click)="getPdfFile()" class="download-icon">
           <img src="../../../assets/icons/download-before.png" alt="">
         </div>
       </div>
@@ -38,7 +38,7 @@
         <td>
           <div class="action">
             <img class="pointer" src="../../../../assets/icons/edit.png" alt="">
-            <img (click)="deleteExpense(expense.expenseId)" class="pointer" src="../../../../assets/icons/delete.png" alt="">
+            <img (click)="deleteExpense(expense.expenseId, expense.name)" class="pointer" src="../../../../assets/icons/delete.png" alt="">
           </div>
         </td>
       </tr>

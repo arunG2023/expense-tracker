@@ -154,3 +154,9 @@ export const errorPageConfig = {
         }
     }
 }
+
+
+export const fileConfig = {
+    FILE_NAME: "ExpenseData.pdf",
+    FILE_TITLE: "Expenses"
+}
