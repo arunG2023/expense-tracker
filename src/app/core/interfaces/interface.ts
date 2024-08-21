@@ -64,3 +64,11 @@ export interface Modal {
     isUpdateExepense: boolean;
     data?: any
 }
+
+export interface GetPDF {
+    type: string;
+    data: {
+        title: string;
+        data: any[]
+    }
+}

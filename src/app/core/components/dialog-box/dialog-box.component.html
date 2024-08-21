@@ -5,8 +5,12 @@
         </div>
         <hr color="white">
         <div >
-            Do you want to delete : Expense name
+            Do you want to delete : 
         </div>
+        <div class="weight-600">
+            {{expenseData.name}}
+        </div>
+        <hr color="white">
         <div class="confirm-button">
             <button (click)="closeDialog()" class="btn btn-danger  mr-2">No</button>
             <button (click)="deleteExpense()" class="btn btn-success">Yes</button>

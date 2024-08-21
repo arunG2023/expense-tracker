@@ -7,5 +7,6 @@ export const apiUrl = {
     GET_ALL_CATEGORIES: environment.baseAPIUrl + "/category",
     GET_ALL_MODE: environment.baseAPIUrl + "/mode",
     ADD_EXPENSE: environment.baseAPIUrl + "/expense/add",
-    DELETE_EXPENSE: environment.baseAPIUrl +  "/expense/delete"
+    DELETE_EXPENSE: environment.baseAPIUrl +  "/expense/delete",
+    GET_PDF: environment.baseAPIUrl + "/pdf"
 }
