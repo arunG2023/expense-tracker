@@ -25,7 +25,7 @@ export class LoadingSpinnerComponent implements OnInit {
     this._spinnerService.loadSpinner    
         .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
         .subscribe(data => {
-          console.log(data);
+          // console.log(data);
           this.showSpinner = data;
         })
   }

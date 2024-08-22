@@ -7,6 +7,8 @@ import { routesConfig } from '../../config/routes-config';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { UserService } from '../../services/user.service';
 import { LoadingSpinnerService } from '../../services/loading-spinner.service';
+import { DialogService } from '../../services/dialog.service';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-error-page',
@@ -24,12 +26,16 @@ export class ErrorPageComponent implements OnInit {
       private _router: Router,
       private _location: Location,
       private _userService: UserService,
-      private _spinnerSevice: LoadingSpinnerService
+      private _spinnerSevice: LoadingSpinnerService,
+      private _dialogService: DialogService,
+      private _modalService: ModalService
   ) { }
 
   ngOnInit(): void {
     this._activatedRoute.queryParams.subscribe(params => {
       this._spinnerSevice.stopSpinner();
+      this._dialogService.hideDialog();
+      this._modalService.hideModal();
       if(params['code'] == 403){
         this.errorData = errorPageConfig.FORBIDDEN;
       }

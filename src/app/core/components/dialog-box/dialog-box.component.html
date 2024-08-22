@@ -1,33 +1,33 @@
 <div class="dialog-main" *ngIf="showDialog">
     <div class="dialog-box">
         <div class="weight-600">
-            Are you sure?
+            {{ htmlLabel["TEXT"]["DELETE_DIALOG_HEADER"] }}
         </div>
         <hr color="white">
         <div >
-            Do you want to delete : 
+            {{ htmlLabel["TEXT"]["DELETE_DIALOG_QUESTION"] }}
         </div>
         <div class="weight-600">
             {{expenseData.name}}
         </div>
         <hr color="white">
         <div class="confirm-button">
-            <button (click)="closeDialog()" class="btn btn-danger  mr-2">No</button>
-            <button (click)="deleteExpense()" class="btn btn-success">Yes</button>
+            <button (click)="closeDialog()" class="btn btn-danger  mr-2">{{ htmlLabel["BUTTON"]["NO"] }}</button>
+            <button (click)="deleteExpense()" class="btn btn-success">{{ htmlLabel["BUTTON"]["YES"] }}</button>
         </div>
     </div>
 </div>
 <div class="dialog-main" *ngIf="showAddCategory">
    <div class="dialog-box">
     <div class="weight-600 modal-header-dev" >
-        Add Category
+        {{ htmlLabel["TEXT"]["ADD_CATEGORY"] }}
     </div>
     <div>
-        <input id="category" class="form-control form-control-lg" [placeholder]="'categ'" type="text" [ngModel]="categoryName" autocomplete="off">
+        <input #categoryInput id="category" class="form-control form-control-lg" [placeholder]="htmlLabel['PLACEHOLDER']['ENTER_CATEGORY']" type="text"  autocomplete="off">
     </div>
     <div class="d-flex justify-content-center align-items-center mt-2">
-        <button (click)="closeModal()" class="btn btn-danger mr-2">Cancel</button>
-        <button (click)="addCategory()" class="btn btn-primary">Add Category</button>
+        <button (click)="closeModal()" class="btn btn-danger mr-2">{{ htmlLabel["BUTTON"]["CANCEL"] }}</button>
+        <button (click)="addCategory()" class="btn btn-primary">{{ htmlLabel["BUTTON"]["ADD_CATEGORY"] }}</button>
     </div>
    </div>
 </div>

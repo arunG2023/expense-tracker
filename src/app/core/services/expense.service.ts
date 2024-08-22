@@ -33,6 +33,11 @@ export class ExpenseService {
     return this._http.get(apiUrl.GET_ALL_CATEGORIES);
   }
 
+  // Api call to add category
+  public addCategory(data: any): Observable<any>{
+    return this._http.post(apiUrl.ADD_CATEGORY, data);
+  }
+
   public getModeDate(): Observable<any> {
     return this._http.get(apiUrl.GET_ALL_MODE);
   }

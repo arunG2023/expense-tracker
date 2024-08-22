@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogService } from '../../services/dialog.service';
 import { Subject } from 'rxjs/internal/Subject';
@@ -8,7 +8,7 @@ import { ExpenseService } from '../../services/expense.service';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { LoadingSpinnerService } from '../../services/loading-spinner.service';
 import { SnackbarService } from '../../services/snackbar.service';
-import { messages, snackBar } from '../../config/common-config';
+import { htmlLabel, messages, snackBar } from '../../config/common-config';
 import { ModalService } from '../../services/modal.service';
 import { FormsModule } from '@angular/forms';
 
@@ -26,7 +26,9 @@ export class DialogBoxComponent implements OnInit {
   public showDialog: boolean = false;
   public showAddCategory: boolean = false;
 
-  public categoryName: string = '';
+
+  // Label config;
+  public htmlLabel: any = htmlLabel;
 
   
   // Subject to destroy
@@ -108,11 +110,33 @@ export class DialogBoxComponent implements OnInit {
   // Modal
   public closeModal(){
     this._modalService.hideModal();
+    
   }
 
-  public addCategory(){
-    if(this.categoryName){
+  // Add Category
+  @ViewChild("categoryInput") categoryInput?: ElementRef;
+  // ngAfterViewInit(){
+  //   console.log(this.categoryInput?.nativeElement);
+  // }
 
+  public addCategory(){
+    // console.log(this.categoryInput?.nativeElement.value);
+    let categoryName: string = this.categoryInput?.nativeElement.value;
+    if(categoryName){
+      this._spinnerService.startSpinner();
+      this._expenseService.addCategory({category: categoryName})
+        .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
+        .subscribe(res => {
+          if(res && res.data){
+            this._spinnerService.stopSpinner();
+            this._snackBarService.setData({
+              message: messages.SUCCESS.CATEGORY_ADDED,
+              type: snackBar.TYPE.SUCCESS,
+              time: snackBar.TIME.MIN
+            });
+            this._modalService.hideModal(true, res.data);
+          }
+        })
     }
     else{
       this._snackBarService.setData({

@@ -17,7 +17,7 @@ export class ApiHeaderInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = this._userService.getAccessToken();
-    console.log(token)
+    // console.log(token)
     if(token){
        // Clone the request and attach the token
        const authReq = request.clone({
