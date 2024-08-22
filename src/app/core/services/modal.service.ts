@@ -10,6 +10,9 @@ export class ModalService {
   public modalData: BehaviorSubject<Modal> = new BehaviorSubject(this.initialState);
   public modalData$: Observable<any> = this.modalData.asObservable();
 
+  // Category Add:
+  public categoryOptions: BehaviorSubject<any> = new BehaviorSubject(null);
+
 
   public showModal(data: Modal){
     window.scrollTo({
@@ -21,8 +24,10 @@ export class ModalService {
     this.modalData.next(data);
   }
 
-  public hideModal(){
+  public hideModal(isAdded: boolean = false, categoryData: any = null){
+    if(isAdded && categoryData) this.categoryOptions.next(categoryData)
     this.modalData.next(this.initialState);
+    document.body.classList.remove('body');
   }
 
   constructor() { }

@@ -60,6 +60,7 @@ export class AddExpenseFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._checkForCategoryAdd();
     this._expenseService.getCategoryData()
       .pipe(takeUntil(this._ngUnsubscribe.asObservable()),
         switchMap((resCategories: any) => {
@@ -74,6 +75,20 @@ export class AddExpenseFormComponent implements OnInit {
   ngOnDestroy(): void {
     this._ngUnsubscribe.next();
     this._ngUnsubscribe.complete();
+  }
+
+  // Update category option when added:
+  private _checkForCategoryAdd(){
+    this._modalService.categoryOptions.asObservable()
+      .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
+      .subscribe(data => {
+        if(data){
+          // console.log(data);
+          this.categoryOption = data;
+          this.hover2();
+          this.onCategorySelect(data[data.length-1].category)
+        }
+      })
   }
 
   public addExpense() {

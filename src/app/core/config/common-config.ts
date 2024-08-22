@@ -38,7 +38,7 @@ export const messages = {
         CATEGORY_REQUIRED: "Category is required",
     },
     SUCCESS: {
-
+        CATEGORY_ADDED: "Category added successfully",
     }
 }
 
@@ -60,12 +60,19 @@ export const htmlLabel = {
         TODAY: "Today",
         EXPENSE: "Expense",
         AMOUNT: "Amount",
-        DATE: "Date"
-
+        DATE: "Date",
+        DELETE_DIALOG_HEADER: "Are you sure?",
+        DELETE_DIALOG_QUESTION: "Do you want to delete :",
+        ADD_CATEGORY: "Add Category",
     },
     BUTTON: {
         LOGIN: "Login",
-        SIGN_UP: "Sign Up"
+        SIGN_UP: "Sign Up",
+        YES: "Yes",
+        NO: "No",
+        ADD_CATEGORY: "Add Category",
+        CANCEL: "Cancel"
+
     }, 
 
     PLACEHOLDER: {
@@ -78,7 +85,8 @@ export const htmlLabel = {
         ENTER_EXPENSE: "Enter Expense",
         ENTER_AMOUNT: "Enter Amount",
         SELECT_MODE: "Select a mode",
-        SELECT_CATEGORY: "Select a category"
+        SELECT_CATEGORY: "Select a category",
+        ENTER_CATEGORY: "Enter Category"
     },
 
     TABLE: {
