@@ -11,6 +11,7 @@ import { ExpenseService } from '../../services/expense.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { FileService } from '../../services/file.service';
 import { LoadingSpinnerService } from '../../services/loading-spinner.service';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-expense-table',
@@ -49,7 +50,8 @@ export class ExpenseTableComponent implements OnInit {
       private _dialogService: DialogService,
       private _expenseSerice: ExpenseService,
       private _fileService: FileService,
-      private _spinnerService: LoadingSpinnerService
+      private _spinnerService: LoadingSpinnerService,
+      private _modalService: ModalService
   ) { }
 
   ngOnInit(): void {
@@ -86,6 +88,14 @@ export class ExpenseTableComponent implements OnInit {
       id: id,
       name: name
     }})
+  }
+
+  public editExpense(data: any){
+    this._modalService.showModal({
+      isUpdateExepense: true,
+      isAddCategory: false,
+      data: data
+    })
   }
   
 

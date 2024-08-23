@@ -46,8 +46,12 @@
                 <span *ngIf="addExpenseForm.controls['date'].touched && addExpenseForm.controls['date'].hasError('required')" class="input-error">{{ validationMessages['DATE_REQUIRED'] }}</span>
             </div>
         </div>
-        <div class="d-flex justify-content-center align-items-center">
+        <div class="d-flex justify-content-center align-items-center" *ngIf="!editData">
             <button (click)="addExpense()" class="btn btn-primary mt-4">Add Expense</button>
+        </div>
+        <div class="d-flex justify-content-center align-items-center mt-3" *ngIf="editData">
+            <button (click)="_modalService.hideModal()"  class="btn btn-danger mr-2">{{ htmlLabel["BUTTON"]["CANCEL"] }}</button>
+            <button (click)="updateExpense()" class="btn btn-primary">{{ htmlLabel["BUTTON"]["EDIT_EXPENSE"] }}</button>
         </div>
     </div>
 </div>

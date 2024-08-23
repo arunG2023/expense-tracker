@@ -93,3 +93,7 @@ input[type="date"],
 .hide{
     display: none;
 }
+
+.background-color-white{
+    background-color: white;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { htmlLabel, messages, snackBar, validationLimit, validationRegex } from '../../config/common-config';
@@ -8,7 +8,7 @@ import { Subject } from 'rxjs/internal/Subject';
 import { ExpenseService } from '../../services/expense.service';
 import { switchMap, takeUntil } from 'rxjs';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
-import { AddExpense } from '../../interfaces/interface';
+import { AddExpense, ExpenseTableData } from '../../interfaces/interface';
 import { Router } from '@angular/router';
 import { routesConfig } from '../../config/routes-config';
 import { LoadingSpinnerService } from '../../services/loading-spinner.service';
@@ -26,6 +26,8 @@ import { ModalService } from '../../services/modal.service';
   styleUrls: ['./add-expense-form.component.css']
 })
 export class AddExpenseFormComponent implements OnInit {
+  @Input() editData: any = null;
+
   // Subject to destroy
   private _ngUnsubscribe: Subject<void> = new Subject();
 
@@ -48,7 +50,7 @@ export class AddExpenseFormComponent implements OnInit {
     private _expenseService: ExpenseService,
     private _router: Router,
     private _spinnerService: LoadingSpinnerService,
-    private _modalService: ModalService
+    public _modalService: ModalService
   ) {
     this.addExpenseForm = new FormGroup({
       name: new FormControl('', [Validators.required, expenseNameCheck()]),
@@ -60,6 +62,17 @@ export class AddExpenseFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.editData){
+      console.log(this.editData);
+      let select = document.getElementsByClassName("custom-select-dev-option")
+      if(select && select.length){
+        for(let i=0;i<select.length;i++){
+          select[i].classList.add("background-color-white")
+          this._fillFormForEdit(this.editData)
+        }
+      }
+      
+    }
     this._checkForCategoryAdd();
     this._expenseService.getCategoryData()
       .pipe(takeUntil(this._ngUnsubscribe.asObservable()),
@@ -174,6 +187,34 @@ export class AddExpenseFormComponent implements OnInit {
   public openAddCategoryModal(){
     this._modalService.showModal({isAddCategory: true, isUpdateExepense: false});
     this.hover2();
+  }
+
+  // Edit Expense:
+  private _fillFormForEdit(expenseData: any ){
+    this.addExpenseForm.controls["name"].setValue(expenseData.name);
+    this.addExpenseForm.controls["amount"].setValue(expenseData.amount);
+    this.addExpenseForm.controls["category"].setValue(expenseData.category);
+    this.addExpenseForm.controls["mode"].setValue(expenseData.mode);
+
+    // 2024-08-13
+    let expenseDate = new Date(expenseData.date);
+    let month = (expenseDate.getMonth()+ 1 < 10)? "0" +( expenseDate.getMonth()+ 1) : expenseDate.getMonth()+ 1;
+    let date = (expenseDate.getDate() < 10)? "0" + expenseDate.getDate() : expenseDate.getDate();
+    this.addExpenseForm.controls["date"].setValue(`${expenseDate.getFullYear()}-${month}-${date}`);
+  }
+
+  public updateExpense(){
+    this.addExpenseForm.markAllAsTouched();
+    if(this.addExpenseForm.valid){
+      console.log(this.addExpenseForm.value)
+    }
+    else {
+      this._snackBarService.setData({
+        message: messages.ERROR.FILL_ALL,
+        type: snackBar.TYPE.ERROR,
+        time: 5
+      });
+    }
   }
 }
 

@@ -11,6 +11,11 @@ export class LoadingSpinnerService {
   constructor() { }
 
   public startSpinner(){
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    })
     document.body.classList.add('body');
     this.loadSpinner.next(true);
   }

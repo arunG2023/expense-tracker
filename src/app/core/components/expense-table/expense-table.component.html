@@ -37,7 +37,7 @@
         <td>{{expense.date}}</td>
         <td>
           <div class="action">
-            <img class="pointer" src="../../../../assets/icons/edit.png" alt="">
+            <img (click)="editExpense(expense)" class="pointer" src="../../../../assets/icons/edit.png" alt="">
             <img (click)="deleteExpense(expense.expenseId, expense.name)" class="pointer" src="../../../../assets/icons/delete.png" alt="">
           </div>
         </td>
