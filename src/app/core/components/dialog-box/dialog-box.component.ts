@@ -11,6 +11,7 @@ import { SnackbarService } from '../../services/snackbar.service';
 import { htmlLabel, messages, snackBar } from '../../config/common-config';
 import { ModalService } from '../../services/modal.service';
 import { FormsModule } from '@angular/forms';
+import { AddExpenseFormComponent } from '../add-expense-form/add-expense-form.component';
 
 @Component({
   selector: 'app-dialog-box',
@@ -18,13 +19,16 @@ import { FormsModule } from '@angular/forms';
   imports: [
             CommonModule,
             LoadingSpinnerComponent,
-            FormsModule],
+            FormsModule,  
+            AddExpenseFormComponent
+          ],
   templateUrl: './dialog-box.component.html',
   styleUrls: ['./dialog-box.component.css']
 })
 export class DialogBoxComponent implements OnInit {
   public showDialog: boolean = false;
   public showAddCategory: boolean = false;
+  public showEditExpense: boolean = false;
 
 
   // Label config;
@@ -64,6 +68,8 @@ export class DialogBoxComponent implements OnInit {
           .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
           .subscribe((data: Modal) => {
             this.showAddCategory = data.isAddCategory;
+            this.showEditExpense = data.isUpdateExepense;
+            if(data.data) this.expenseData = data.data
           })
   }
 

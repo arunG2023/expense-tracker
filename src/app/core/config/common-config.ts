@@ -71,8 +71,8 @@ export const htmlLabel = {
         YES: "Yes",
         NO: "No",
         ADD_CATEGORY: "Add Category",
-        CANCEL: "Cancel"
-
+        CANCEL: "Cancel",
+        EDIT_EXPENSE: "Update"
     }, 
 
     PLACEHOLDER: {

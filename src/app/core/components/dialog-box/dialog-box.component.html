@@ -31,3 +31,6 @@
     </div>
    </div>
 </div>
+<div class="dialog-main" *ngIf="showEditExpense">
+    <app-add-expense-form [editData]="expenseData" class="edit-form"></app-add-expense-form>  
+     </div>
