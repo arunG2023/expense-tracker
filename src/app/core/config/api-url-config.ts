@@ -9,5 +9,6 @@ export const apiUrl = {
     ADD_EXPENSE: environment.baseAPIUrl + "/expense/add",
     DELETE_EXPENSE: environment.baseAPIUrl +  "/expense/delete",
     GET_PDF: environment.baseAPIUrl + "/pdf",
-    ADD_CATEGORY: environment.baseAPIUrl + "/category/add"
+    ADD_CATEGORY: environment.baseAPIUrl + "/category/add",
+    UPDATE_EXPENSE: environment.baseAPIUrl + "/expense/update"
 }
