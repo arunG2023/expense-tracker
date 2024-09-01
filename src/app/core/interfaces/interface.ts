@@ -72,3 +72,12 @@ export interface GetPDF {
         data: any[]
     }
 }
+
+export interface EditExpense {
+    name: string;
+    amount: string;
+    modeId: string;
+    categoryId: string;
+    date: string;
+    expenseId: string;
+}

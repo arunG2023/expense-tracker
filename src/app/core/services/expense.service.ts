@@ -53,4 +53,8 @@ export class ExpenseService {
       }
     });
   }
+
+  public editExpense(data: any): Observable<any> {
+    return this._http.put(apiUrl.UPDATE_EXPENSE, data);
+  }
 } 
