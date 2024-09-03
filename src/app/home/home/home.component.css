@@ -4,7 +4,7 @@
     --sidebar-item-text-color: #4b5563;
     --navbar-background-color: none;
     --navbar-hamburger-hover-border-color: white;
-    --sidebar-box-shadow: 0px 4px 50px #D9DDFC;
+    --sidebar-box-shadow: 0px 4px 50px #d9ddfc89;
     --sidebar-border: 1px solid #f5f3f5;
     --sidebar-white-space-background-color: rgba(0, 0, 0, 0.4);
 
@@ -20,6 +20,9 @@
     --table-header-background-color: rgb(249, 250, 251);  
     --table-header-background-active: #eef2ff;
     --table-header-text-color-active: #4338ca;
+
+    /* Profile Bar */
+    --profile-bar-item-background-color: rgb(223, 231, 239)
 
 }
 
@@ -45,6 +48,9 @@
      --table-header-background-color: rgb(15, 21, 34);
      --table-header-background-active: rgba(129, 140, 248, 0.16);
      --table-header-text-color-active:rgba(255, 255, 255, 0.87);
+
+     /* Profile Bar */
+     --profile-bar-item-background-color: rgb(223, 231, 239);
 }
 
 .home{

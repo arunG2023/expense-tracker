@@ -1,0 +1,27 @@
+<div class="profile-bar-contianer">
+    <div (click)="closeProfileBar()" class="profile-bar-white-space"></div>
+    <div class="profile-bar">
+        <div class="close-button">
+            <span (click)="closeProfileBar()" class="weight-500 text-medium pointer">
+                X
+            </span>
+        </div>
+        <div>
+            <div class="text-small weight-600">{{ htmlLabel["TEXT"]["WELCOME"] }}</div>
+            <div *ngIf="userData" class="text-small">{{ userData.name }}</div>
+        </div>
+        <div>
+            <div class="profile-bar-item pointer">
+                <div><img class="profile-bar-item-logo" src="../../../../../../assets/icons/profile.png" alt=""></div>
+                <div class="text-small weight-600">{{ htmlLabel["TEXT"]["PROFILE"] }}</div>
+            </div>
+        </div>
+        <div>
+            <div class="profile-bar-item pointer">
+                <div><img class="profile-bar-item-logo" src="../../../../../../assets/icons/logout.png" alt=""></div>
+                <div (click)="logOutUser()" class="text-small weight-600">{{ htmlLabel["TEXT"]["LOG_OUT"] }}</div>
+            </div>
+        </div>
+    </div>
+    
+</div>

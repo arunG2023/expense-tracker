@@ -2,8 +2,14 @@
 
 <div class="home" [ngClass]="(changeDarkTheme)? 'dark-theme' : 'light-theme'">
     <app-sidebar *ngIf="enableSideBar" (sideBarClose)="closeSideBar($event)"></app-sidebar>
+    <app-profile-bar *ngIf="enableProfileBar" (profileBarClose)="closeProfileBar($event)"></app-profile-bar>
     <div class="main-panel">
-        <app-header (sideBar)="showSideBar($event)" (isDarkMode)="changeTheme($event)"></app-header>
+        <app-header 
+            (sideBar)="showSideBar($event)" 
+            (isDarkMode)="changeTheme($event)"
+            (profileBar)="showProfileBar($event)">
+        </app-header>
         <router-outlet></router-outlet>
     </div>
+    
 </div>
