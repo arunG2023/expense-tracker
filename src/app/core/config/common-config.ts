@@ -39,6 +39,8 @@ export const messages = {
     },
     SUCCESS: {
         CATEGORY_ADDED: "Category added successfully",
+        LOGGED_OUT: "Logged out successfully",
+        
     }
 }
 
@@ -64,6 +66,9 @@ export const htmlLabel = {
         DELETE_DIALOG_HEADER: "Are you sure?",
         DELETE_DIALOG_QUESTION: "Do you want to delete :",
         ADD_CATEGORY: "Add Category",
+        WELCOME: "Welcome",
+        PROFILE: "Profile",
+        LOG_OUT: "Log Out"
     },
     BUTTON: {
         LOGIN: "Login",

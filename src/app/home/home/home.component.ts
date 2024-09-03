@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   public changeDarkTheme: boolean = false;
   public enableSideBar: boolean = false;
+  public enableProfileBar: boolean = false;
 
 
   // Subject to destroy
@@ -60,6 +61,14 @@ export class HomeComponent implements OnInit {
 
   public closeSideBar(value: boolean){
     this.enableSideBar = !value;
+  }
+
+  public showProfileBar(value: boolean){
+    this.enableProfileBar = value;
+  }
+
+  public closeProfileBar(value: boolean){
+    this.enableProfileBar = !value;
   }
 
 }

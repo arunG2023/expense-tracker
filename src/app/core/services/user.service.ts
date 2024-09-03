@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { apiUrl } from '../config/api-url-config';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,12 @@ export class UserService {
 
   public getAccessToken(): any{
     return localStorage.getItem('Token');
+  }
+
+  public decodeToken(): any{
+    const jwtHelper = new JwtHelperService();
+    const userData =  jwtHelper.decodeToken(this.getAccessToken());
+    // console.log(userData);
+    return userData;
   }
 }

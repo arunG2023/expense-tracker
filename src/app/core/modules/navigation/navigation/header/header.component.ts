@@ -10,8 +10,10 @@ import { RouteService } from 'src/app/core/services/route.service';
 export class HeaderComponent implements OnInit {
   @Output() isDarkMode: EventEmitter<boolean> = new EventEmitter(false);
   @Output() sideBar: EventEmitter<boolean> = new EventEmitter(false);
+  @Output() profileBar: EventEmitter<boolean> = new EventEmitter(false);
   public darkTheme: boolean = false;
   public sideBarVal: boolean = false;
+  public profileBarVal: boolean = false;
   public pageTitle: string = '';
 
   constructor(
@@ -33,6 +35,10 @@ export class HeaderComponent implements OnInit {
 
   public showSideBar(val: boolean){
     this.sideBar.emit(val);
+  }
+
+  public showProfileBar(val: boolean){
+    this.profileBar.emit(val);
   }
 
 }
