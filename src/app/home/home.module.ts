@@ -11,6 +11,7 @@ import { ExpenseTableComponent } from '../core/components/expense-table/expense-
 import { LoadingSpinnerComponent } from "../core/components/loading-spinner/loading-spinner.component";
 import { FormsModule } from '@angular/forms';
 import { AddExpenseFormComponent } from '../core/components/add-expense-form/add-expense-form.component';
+import { ProfilePageComponent } from '../core/components/profile-page/profile-page.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AddExpenseFormComponent } from '../core/components/add-expense-form/add
     ExpenseTableComponent,
     LoadingSpinnerComponent,
     FormsModule,
-    AddExpenseFormComponent
+    AddExpenseFormComponent,
+    ProfilePageComponent
 ]
 })
 export class HomeModule { }

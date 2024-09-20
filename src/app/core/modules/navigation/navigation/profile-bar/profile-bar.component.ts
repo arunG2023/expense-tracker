@@ -37,6 +37,11 @@ export class ProfileBarComponent implements OnInit {
     this._userService.logOutUser();
   }
 
+  public showProfilePage(){
+    
+    this._userService.showProfilePage();
+  }
+
 }
 
 

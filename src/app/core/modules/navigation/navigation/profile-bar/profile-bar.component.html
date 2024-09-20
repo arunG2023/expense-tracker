@@ -11,7 +11,7 @@
             <div *ngIf="userData" class="text-small">{{ userData.name }}</div>
         </div>
         <div>
-            <div class="profile-bar-item pointer">
+            <div class="profile-bar-item pointer" (click)="showProfilePage()">
                 <div><img class="profile-bar-item-logo" src="../../../../../../assets/icons/profile.png" alt=""></div>
                 <div class="text-small weight-600">{{ htmlLabel["TEXT"]["PROFILE"] }}</div>
             </div>

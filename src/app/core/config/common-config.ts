@@ -68,7 +68,11 @@ export const htmlLabel = {
         ADD_CATEGORY: "Add Category",
         WELCOME: "Welcome",
         PROFILE: "Profile",
-        LOG_OUT: "Log Out"
+        LOG_OUT: "Log Out",
+        FIRST_NAME: "First Name",
+        LAST_NAME: "Last Name",
+        ADDRESS: "Address",
+        PHONE: "Phone"
     },
     BUTTON: {
         LOGIN: "Login",
@@ -77,7 +81,9 @@ export const htmlLabel = {
         NO: "No",
         ADD_CATEGORY: "Add Category",
         CANCEL: "Cancel",
-        EDIT_EXPENSE: "Update"
+        EDIT_EXPENSE: "Update",
+        UPDATE: "Update",
+        EDIT: "Edit"
     }, 
 
     PLACEHOLDER: {

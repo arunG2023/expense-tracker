@@ -22,7 +22,10 @@
     --table-header-text-color-active: #4338ca;
 
     /* Profile Bar */
-    --profile-bar-item-background-color: rgb(223, 231, 239)
+    --profile-bar-item-background-color: rgb(223, 231, 239);
+
+    /* Profile Edit */
+    --edit-data-backgorund-color: rgb(250, 250, 250);
 
 }
 
@@ -51,6 +54,9 @@
 
      /* Profile Bar */
      --profile-bar-item-background-color: rgb(223, 231, 239);
+
+     /* Edit Profile */
+     --edit-data-backgorund-color: black;
 }
 
 .home{
