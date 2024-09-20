@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   public changeDarkTheme: boolean = false;
   public enableSideBar: boolean = false;
   public enableProfileBar: boolean = false;
+  public showProfilePage: boolean = false;
 
 
   // Subject to destroy
@@ -25,11 +26,16 @@ export class HomeComponent implements OnInit {
     private _userService: UserService,
     private _router: Router,
     private _expenseService: ExpenseService,
-    private _spinnerService: LoadingSpinnerService
+    private _spinnerService: LoadingSpinnerService,
+
   ) { }
 
   ngOnInit(): void {
     this._loadDataFromAPI();
+
+    this._userService.profilePage.pipe(
+      takeUntil(this._ngUnsubscribe.asObservable()))
+      .subscribe(value => this.showProfilePage = value)
   }
 
   ngOnDestroy(): void{

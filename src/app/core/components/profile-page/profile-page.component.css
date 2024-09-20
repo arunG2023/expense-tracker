@@ -1,0 +1,140 @@
+.edit-profile{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(128, 122, 122, 0.3);
+    top: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+    z-index: 10000;
+}
+
+.edit-container{
+    padding: 20px;
+    width: 700px;
+    height: 500px;
+    border-radius: 20px;
+    background: var(--backgroud-color);
+}
+
+.profile-img{
+    width: 100%;
+    /* height: 150px; */
+    padding: 10px 0px;
+    border: 1px solid var(--top-section-card-border-color);
+    border-radius: 20px;
+    background-color: var(--top-section-card-background);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.img-div{
+    width: 100px;
+    height: 80px;
+    border-radius: 50%;
+    /* background-color: red; */
+    border: 1px solid var(--top-section-card-border-color);
+    padding: 5px;
+}
+
+.img-div img{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.profile-content{
+    margin-top: 20px;
+    width: 100%;
+    /* height: 400px; */
+    border: 1px solid var(--top-section-card-border-color);
+    border-radius: 20px;
+    background-color: var(--top-section-card-background);
+    padding: 10px;
+}
+
+.profile-data{
+    width: 100%;
+   
+    padding: 10px;
+    border-bottom: 1px solid var(--top-section-card-border-color);
+
+    display: grid;
+    grid-template-columns: 150px 1fr 40px;
+}
+
+
+
+.data-title, .data-value, .data-edit{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.data-value{
+    min-width: 200px;
+}
+
+.edit-data{
+    width: 100%;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    background-color: var(--edit-data-backgorund-color);
+}
+
+.edit-data .edit-data-form input{
+    /* width: fit-content; */
+    max-width: 600px;
+}
+
+.edit-data .edit-data-form button {
+    width: fit-content;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.button-div{
+    margin-top: 10px;
+    display: flex;
+    justify-content: start;
+    
+}
+
+.text-big, .text-medium {
+    color: var(--sidebar-item-text-color);
+}
+
+.text-small{
+    color: var(--top-section-card-amount-text-color);
+}
+
+/* Media Query */
+@media screen and (max-width: 600px){
+    .edit-container{
+        width: 300px;
+        overflow-y: scroll;
+    }
+
+    .edit-data{
+        overflow-x: scroll;
+    }
+
+    .profile-data{
+        overflow-x: scroll;
+    }
+}
+
+@media screen and (min-width: 601px) and (max-width: 950px){
+    .edit-container{
+        width: 500px;
+    }
+}

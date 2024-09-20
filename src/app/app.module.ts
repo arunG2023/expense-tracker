@@ -11,6 +11,7 @@ import { ApiErrorInterceptor } from './core/interceptors/api-error.interceptor';
 import { ApiHeaderInterceptor } from './core/interceptors/api-header.interceptor';
 import { LoadingSpinnerComponent } from "./core/components/loading-spinner/loading-spinner.component";
 import { DialogBoxComponent } from "./core/components/dialog-box/dialog-box.component";
+import { ProfilePageComponent } from "./core/components/profile-page/profile-page.component";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DialogBoxComponent } from "./core/components/dialog-box/dialog-box.comp
     SnackBarComponent,
     NavigationModule,
     LoadingSpinnerComponent,
-    DialogBoxComponent
+    DialogBoxComponent,
+    ProfilePageComponent
 ],
   providers: [
     {

@@ -1,0 +1,79 @@
+<div class="edit-profile">
+    <div class="edit-container">
+        <div class="profile-img">
+            <div class="img-div pointer">
+                <img src="../../../../assets/icons/profile.png">
+            </div>
+        </div>
+        <div class="profile-content" *ngIf="userProfileData">
+            <div class="profile-data" *ngIf='editField != htmlLabel["TEXT"]["FIRST_NAME"]'>
+                <span class="data-title text-medium weight-600">{{ htmlLabel["TEXT"]["FIRST_NAME"] }}</span>
+                <span class="data-value text-small"> {{ userProfileData["firstName"] }} </span>
+                <span class="data-edit text-small pointer text-primary" (click)='editField = htmlLabel["TEXT"]["FIRST_NAME"]'>{{ htmlLabel["BUTTON"]["EDIT"] }}</span>
+            </div>
+            <div class="edit-data" *ngIf='editField == htmlLabel["TEXT"]["FIRST_NAME"]'>
+                <span class="edit-data-title text-medium weight-600">{{ htmlLabel["TEXT"]["FIRST_NAME"] }}</span>
+                <div class="edit-data-form">
+                    <input class="input-field" class="form-control form-control-sm" type="text" autocomplete="off" [value]='userProfileData["firstName"]' >
+                    <div class="button-div">
+                        <button type="button" class="btn btn-primary"> {{ htmlLabel["BUTTON"]["UPDATE"] }}</button>
+                        <button type="button" class="btn btn-light" (click)="editField = ''">{{ htmlLabel["BUTTON"]["CANCEL"] }}</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-data" *ngIf='editField != htmlLabel["TEXT"]["LAST_NAME"]'>
+                <span class="data-title text-medium weight-600">{{ htmlLabel["TEXT"]["LAST_NAME"] }}</span>
+                <span class="data-value text-small">{{ userProfileData["lastName"] }}</span>
+                <span class="data-edit text-small pointer text-primary" (click)='editField = htmlLabel["TEXT"]["LAST_NAME"]'>{{ htmlLabel["BUTTON"]["EDIT"] }}</span>
+            </div>
+            <div class="edit-data" *ngIf='editField == htmlLabel["TEXT"]["LAST_NAME"]'>
+                <span class="edit-data-title text-medium weight-600">{{ htmlLabel["TEXT"]["LAST_NAME"] }}</span>
+                <div class="edit-data-form">
+                    <input class="input-field" class="form-control form-control-sm"  type="text" autocomplete="off"  [value]='userProfileData["lastName"]' >
+                    <div class="button-div">
+                        <button type="button" class="btn btn-primary"> {{ htmlLabel["BUTTON"]["UPDATE"] }}</button>
+                        <button type="button" class="btn btn-light" (click)="editField = ''">{{ htmlLabel["BUTTON"]["CANCEL"] }}</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-data" *ngIf='editField != htmlLabel["TEXT"]["ADDRESS"]'>
+                <span class="data-title text-medium weight-600">{{ htmlLabel["TEXT"]["ADDRESS"] }}</span>
+                <span class="data-value text-small"> {{ userProfileData["address"] }} </span>
+                <span class="data-edit text-small pointer text-primary" (click)='editField = htmlLabel["TEXT"]["ADDRESS"]'>{{ htmlLabel["BUTTON"]["EDIT"] }}</span>
+            </div>
+            <div class="edit-data" *ngIf='editField == htmlLabel["TEXT"]["ADDRESS"]'>
+                <span class="edit-data-title text-medium weight-600">{{ htmlLabel["TEXT"]["ADDRESS"] }}</span>
+                <div class="edit-data-form">
+                    <input class="input-field" class="form-control form-control-sm"  type="text" autocomplete="off" [value]='userProfileData["address"]' >
+                    <div class="button-div">
+                        <button type="button" class="btn btn-primary"> {{ htmlLabel["BUTTON"]["UPDATE"] }}</button>
+                        <button type="button" class="btn btn-light" (click)="editField = ''">{{ htmlLabel["BUTTON"]["CANCEL"] }}</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-data" *ngIf='editField != htmlLabel["TEXT"]["PHONE"]'>
+                <span class="data-title text-medium weight-600">{{ htmlLabel["TEXT"]["PHONE"] }}</span>
+                <span class="data-value text-small"> {{ userProfileData["phone"] }} </span>
+                <span class="data-edit text-small pointer text-primary" (click)='editField = htmlLabel["TEXT"]["PHONE"]'>{{ htmlLabel["BUTTON"]["EDIT"] }}</span>
+            </div>
+            <div class="edit-data" *ngIf='editField == htmlLabel["TEXT"]["PHONE"]'>
+                <span class="edit-data-title text-medium weight-600">{{ htmlLabel["TEXT"]["PHONE"] }}</span>
+                <div class="edit-data-form">
+                    <input class="input-field" class="form-control form-control-sm"  type="text" autocomplete="off" [value]='userProfileData["phone"]' >
+                    <div class="button-div">
+                        <button type="button" class="btn btn-primary"> {{ htmlLabel["BUTTON"]["UPDATE"] }}</button>
+                        <button type="button" class="btn btn-light" (click)="editField = ''">{{ htmlLabel["BUTTON"]["CANCEL"] }}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-2 div-center">
+                <button type="button" class="btn btn-secondary" (click)="closeProfilePage()" >{{ htmlLabel["BUTTON"]["CANCEL"] }}</button>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Login, RegisterUser } from '../interfaces/interface';
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { apiUrl } from '../config/api-url-config';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -47,4 +47,30 @@ export class UserService {
     // console.log(userData);
     return userData;
   }
+
+  // Get user profile data
+  public getUserProfileData(): Observable<any>{
+    return this._http.get(apiUrl.GET_USER_PROFILE);
+  }
+
+  // Open and Close 
+  public profilePage: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public profilePage$: Observable<boolean> = this.profilePage.asObservable(); 
+
+  public showProfilePage(){
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    })
+    document.body.classList.add('body');
+    this.profilePage.next(true);
+  }
+
+  public closeProfilePage(){
+    document.body.classList.remove('body');
+    this.profilePage.next(false);
+  }
+
+
 }
