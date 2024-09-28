@@ -81,3 +81,8 @@ export interface EditExpense {
     date: string;
     expenseId: string;
 }
+
+export interface EditUser {
+    key: string;
+    value: string
+}
