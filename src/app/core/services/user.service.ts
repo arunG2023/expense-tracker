@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Login, RegisterUser } from '../interfaces/interface';
+import { EditUser, Login, RegisterUser } from '../interfaces/interface';
 import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -72,5 +72,12 @@ export class UserService {
     this.profilePage.next(false);
   }
 
+
+  // Open and Close 
+  public userData: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public userData$: Observable<boolean> = this.userData.asObservable(); 
+  public updateUserDetails(data: EditUser): Observable<any>{
+    return this._http.put(apiUrl.UPDATE_USER_DATA, data);
+  }
 
 }

@@ -36,6 +36,7 @@ export const messages = {
         DATE_REQUIRED: "Date is required",
         MODE_REQUIRED: "Mode is required",
         CATEGORY_REQUIRED: "Category is required",
+        INVALID_FIELD: (field: string) => `${field} is invalid` 
     },
     SUCCESS: {
         CATEGORY_ADDED: "Category added successfully",

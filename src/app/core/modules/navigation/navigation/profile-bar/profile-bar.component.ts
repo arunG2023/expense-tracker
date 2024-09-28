@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { takeUntil } from 'rxjs';
+import { Subject } from 'rxjs/internal/Subject';
 import { htmlLabel, messages, snackBar } from 'src/app/core/config/common-config';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -14,6 +16,9 @@ export class ProfileBarComponent implements OnInit {
   // HTML Labels
   public htmlLabel: any = htmlLabel;
 
+  // Subject to destroy
+  private _ngUnsubscribe: Subject<void> = new Subject();
+
   public userData: any;
   constructor(
     private _userService: UserService,
@@ -21,7 +26,35 @@ export class ProfileBarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userData =  this._userService.decodeToken();
+    // On First Load
+    this._userService.getUserProfileData()
+      .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
+      .subscribe(data => {
+        data = data.data[0];
+        this._setUserData(data);
+      })
+
+      // When profile updated:
+      this._userService.profilePage$
+        .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
+        .subscribe(
+          data => {
+            this._setUserData(data);
+          }
+        )
+  }
+
+  private _setUserData(data: any){
+    if(data.firstName && data.lastName){
+      this.userData = {
+        name : data.firstName + " " + data.lastName
+      };
+    }
+  }
+
+  ngOnDestroy(): void{
+    this._ngUnsubscribe.next();
+    this._ngUnsubscribe.complete();
   }
 
   public closeProfileBar(){
