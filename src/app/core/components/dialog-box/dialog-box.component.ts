@@ -12,6 +12,7 @@ import { htmlLabel, messages, snackBar } from '../../config/common-config';
 import { ModalService } from '../../services/modal.service';
 import { FormsModule } from '@angular/forms';
 import { AddExpenseFormComponent } from '../add-expense-form/add-expense-form.component';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-dialog-box',
@@ -29,6 +30,7 @@ export class DialogBoxComponent implements OnInit {
   public showDialog: boolean = false;
   public showAddCategory: boolean = false;
   public showEditExpense: boolean = false;
+  public showUploadImage: boolean = false;
 
 
   // Label config;
@@ -45,7 +47,8 @@ export class DialogBoxComponent implements OnInit {
     private _expenseService: ExpenseService,
     private _spinnerService: LoadingSpinnerService,
     private _snackBarService: SnackbarService,
-    private _modalService: ModalService
+    private _modalService: ModalService,
+    private _userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -69,7 +72,8 @@ export class DialogBoxComponent implements OnInit {
           .subscribe((data: Modal) => {
             this.showAddCategory = data.isAddCategory;
             this.showEditExpense = data.isUpdateExepense;
-            if(data.data) this.expenseData = data.data
+            if(data.data) this.expenseData = data.data;
+            this.showUploadImage = (data.isImageUpload)? true : false;
           })
   }
 
@@ -150,6 +154,24 @@ export class DialogBoxComponent implements OnInit {
         type: snackBar.TYPE.ERROR,
         time: snackBar.TIME.MIN
       });
+    }
+  }
+
+
+  // Profile Image Upload:
+  public onProfileImageUpload(event: Event){
+    const input = event.target as HTMLInputElement;
+    let selectedFile = null;
+    if(input.files && input.files.length > 0){
+      selectedFile = input.files[0];
+      const formData = new FormData();
+      formData.append('file',selectedFile);
+      this._userService.uploadProfileImage(formData)
+        .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
+        .subscribe(res => {
+          console.log(res);
+        })
+
     }
   }
 

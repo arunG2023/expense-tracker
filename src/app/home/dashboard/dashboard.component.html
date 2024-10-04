@@ -1,4 +1,4 @@
-<div class="dashboard-main">
+<div class="dashboard-main" *ngIf="expenseDataFromAPI && expenseDataFromAPI.allExpenses.length">
     <!-- top section -->
      <div class="top-section" *ngIf="expenseDataFromAPI">
         <div class="amount-cards">
@@ -67,4 +67,18 @@
         [inputData]="expenseTableData"
         [refreshData]="refreshData.asObservable()">
     </app-expense-table>
+</div>
+
+<div class="no-expense" *ngIf="!expenseDataFromAPI || (expenseDataFromAPI && expenseDataFromAPI.allExpenses.length < 1)">
+  <div class="no-expense-main">
+    <div class="add-expense-button">
+      <button class="btn btn-primary" (click)="gotoAddExpense()">{{ htmlLabel['BUTTON']['ADD_EXPENSE'] }}</button>
+    </div>
+    <div class="thinking-img">
+      <img src="../../../assets/icons/no-dashboard.PNG" alt="Thinking Image">
+    </div>
+    <div class="no-expense-text">
+        {{ htmlLabel['TEXT']['NO_DASHBOARD_TEXT'] }}
+    </div>
+  </div>
 </div>

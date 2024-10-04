@@ -80,4 +80,8 @@ export class UserService {
     return this._http.put(apiUrl.UPDATE_USER_DATA, data);
   }
 
+  // Upload Profile Image:
+  public uploadProfileImage(data: FormData){
+    return this._http.post(apiUrl.UPLOAD_USER_PROFILE_IMG, data);
+  }
 }

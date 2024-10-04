@@ -1,7 +1,7 @@
 <div class="add-expense-form-main">
     <div class="header">
         <div class="align-center text-medium weight-600">
-            Add Expense
+            {{ htmlLabel['TEXT']['ADD_EXPENSE'] }}
         </div>
     </div>
     <div class="form"  [formGroup]="addExpenseForm">
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center align-items-center" *ngIf="!editData">
-            <button (click)="addExpense()" class="btn btn-primary mt-4">Add Expense</button>
+            <button (click)="addExpense()" class="btn btn-primary mt-4">{{ htmlLabel["BUTTON"]["ADD_EXPENSE"] }}</button>
         </div>
         <div class="d-flex justify-content-center align-items-center mt-3" *ngIf="editData">
             <button (click)="_modalService.hideModal()"  class="btn btn-danger mr-2">{{ htmlLabel["BUTTON"]["CANCEL"] }}</button>

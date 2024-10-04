@@ -36,7 +36,7 @@ export const messages = {
         DATE_REQUIRED: "Date is required",
         MODE_REQUIRED: "Mode is required",
         CATEGORY_REQUIRED: "Category is required",
-        INVALID_FIELD: (field: string) => `${field} is invalid` 
+        INVALID_FIELD: (field: string) => `${field} is invalid`,
     },
     SUCCESS: {
         CATEGORY_ADDED: "Category added successfully",
@@ -73,7 +73,10 @@ export const htmlLabel = {
         FIRST_NAME: "First Name",
         LAST_NAME: "Last Name",
         ADDRESS: "Address",
-        PHONE: "Phone"
+        PHONE: "Phone",
+        ADD_EXPENSE: "Add Expense",
+        NO_DASHBOARD_TEXT: '"Hmmm...that blue button must be important...."',
+        NO_EXPENSE_FOUND: "No Expenses Found"
     },
     BUTTON: {
         LOGIN: "Login",
@@ -84,7 +87,8 @@ export const htmlLabel = {
         CANCEL: "Cancel",
         EDIT_EXPENSE: "Update",
         UPDATE: "Update",
-        EDIT: "Edit"
+        EDIT: "Edit",
+        ADD_EXPENSE: "Add Expense"
     }, 
 
     PLACEHOLDER: {

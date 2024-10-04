@@ -103,6 +103,45 @@ select:active{
 
 
 
+/* No Data */
+.no-expense{
+    width: 100%;
+    /* height: 700px; */
+    background-color: white;
+    /* background-color: rgba(217, 226, 225, 1); */
+}
+
+.no-expense-main{
+    width: 100%;
+    min-height: 87vh;
+    background-color: rgba(217, 226, 225, 0.715);
+
+    display: grid;
+    grid-template-rows: 0.5fr 1fr 0.5fr;
+}
+
+.no-expense-text{
+    font-size: 20px;
+    text-align: center;
+    text-wrap: pretty;
+    width: 100%;
+    color: var(--text-color-2);
+}
+
+.add-expense-button, .thinking-img{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 10px;
+}
+
+.thinking-img{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 
 /* Media query */

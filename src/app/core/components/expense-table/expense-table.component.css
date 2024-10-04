@@ -151,3 +151,7 @@
 .pagination-control {
     text-align: center;
 }
+
+.pagination-control > div {
+    margin-left: 24px;
+}

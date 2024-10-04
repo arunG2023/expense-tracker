@@ -12,5 +12,6 @@ export const apiUrl = {
     ADD_CATEGORY: environment.baseAPIUrl + "/category/add",
     UPDATE_EXPENSE: environment.baseAPIUrl + "/expense/update",
     GET_USER_PROFILE: environment.baseAPIUrl + "/user",
-    UPDATE_USER_DATA: environment.baseAPIUrl + "/user/update"
+    UPDATE_USER_DATA: environment.baseAPIUrl + "/user/update",
+    UPLOAD_USER_PROFILE_IMG: environment.baseAPIUrl + "/user/upload/image"
 }

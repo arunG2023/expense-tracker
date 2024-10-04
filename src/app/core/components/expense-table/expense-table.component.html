@@ -42,12 +42,17 @@
           </div>
         </td>
       </tr>
+      <tr *ngIf="!expenseTableData || (expenseTableData && expenseTableData.length < 1)">
+        <td colspan="6" class="pagination-control text-medium"  >
+          <div>{{ htmlLabel['TEXT']['NO_EXPENSE_FOUND'] }}</div>
+        </td>
+      </tr>
       <tr>
-
-        <td colspan="5" class="pagination-control text-small" >
+        <td colspan="6" class="pagination-control text-small" >
           <pagination-controls  (pageChange)="pageChanged($event)" ></pagination-controls>
          </td>
       </tr>
+      
     </table>
   </div>
 </div>
