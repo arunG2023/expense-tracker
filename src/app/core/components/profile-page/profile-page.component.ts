@@ -7,6 +7,7 @@ import { htmlLabel, messages, snackBar, validationRegex } from '../../config/com
 import { FormsModule, NgModel } from '@angular/forms';
 import { SnackbarService } from '../../services/snackbar.service';
 import { EditUser } from '../../interfaces/interface';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   standalone: true,
@@ -34,7 +35,8 @@ export class ProfilePageComponent implements OnInit {
 
   constructor(
       private _userService: UserService,
-      private _snackBarService: SnackbarService
+      private _snackBarService: SnackbarService,
+      private _modalService: ModalService
   ) { }
 
   ngOnInit(): void {
@@ -113,6 +115,16 @@ export class ProfilePageComponent implements OnInit {
   public hideEditField(key: string){
       this.userProfileData[key] = this.userProfileDataCopy[key]
       this.editField = "";
+  }
+
+
+  // Image Upload:
+  public showImageUpload(){
+    this._modalService.showModal({
+      isAddCategory: false,
+      isUpdateExepense: false,
+      isImageUpload: true
+    })
   }
 
 }

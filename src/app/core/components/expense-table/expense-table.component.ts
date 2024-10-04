@@ -1,17 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExpenseTableData, GetPDF } from '../../interfaces/interface';
-import { fileConfig, htmlLabel } from '../../config/common-config';
+import { fileConfig, htmlLabel, messages, snackBar } from '../../config/common-config';
 import { RoundPipe } from '../../pipes/round.pipe';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TruncateStringPipe } from '../../pipes/truncate-string.pipe';
 import { DialogService } from '../../services/dialog.service';
 import { ExpenseService } from '../../services/expense.service';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { min, Observable, Subject, takeUntil } from 'rxjs';
 import { FileService } from '../../services/file.service';
 import { LoadingSpinnerService } from '../../services/loading-spinner.service';
 import { ModalService } from '../../services/modal.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-expense-table',
@@ -47,11 +48,12 @@ export class ExpenseTableComponent implements OnInit {
   public expenseTableData: any[] = [];
 
   constructor(
-      private _dialogService: DialogService,
-      private _expenseSerice: ExpenseService,
-      private _fileService: FileService,
-      private _spinnerService: LoadingSpinnerService,
-      private _modalService: ModalService
+    private _dialogService: DialogService,
+    private _expenseSerice: ExpenseService,
+    private _fileService: FileService,
+    private _spinnerService: LoadingSpinnerService,
+    private _modalService: ModalService,
+    private _snackBarService: SnackbarService
   ) { }
 
   ngOnInit(): void {
@@ -67,11 +69,11 @@ export class ExpenseTableComponent implements OnInit {
         if (this.inputData.data.length > 0) {
           for (const key in expense) {
             // Filter based on the below keys
-            if(["name", "category","amount","mode","date"].includes(key)){
+            if (["name", "category", "amount", "mode", "date"].includes(key)) {
               const value = expense[key].toString().toLowerCase();
               if (value.includes(searchText.toLowerCase())) return true;
             }
-            
+
           }
         }
         return false;
@@ -83,21 +85,23 @@ export class ExpenseTableComponent implements OnInit {
   }
 
 
-  public deleteExpense(id: string, name: string){
-    this._dialogService.showDialog({isShow: true, data: {
-      id: id,
-      name: name
-    }})
+  public deleteExpense(id: string, name: string) {
+    this._dialogService.showDialog({
+      isShow: true, data: {
+        id: id,
+        name: name
+      }
+    })
   }
 
-  public editExpense(data: any){
+  public editExpense(data: any) {
     this._modalService.showModal({
       isUpdateExepense: true,
       isAddCategory: false,
       data: data
     })
   }
-  
+
 
 
   public page: number = 1;
@@ -108,28 +112,39 @@ export class ExpenseTableComponent implements OnInit {
 
 
   // Getting Pdf Files:
-  public getPdfFile(){
-    this._spinnerService.startSpinner();
-    let data: GetPDF = {
-      "type": "1",
-      "data": {
-        "title": fileConfig.FILE_TITLE,
-        "data": this.expenseTableData
+  public getPdfFile() {
+    if (this.expenseTableData.length > 0) {
+      this._spinnerService.startSpinner();
+      let data: GetPDF = {
+        "type": "1",
+        "data": {
+          "title": fileConfig.FILE_TITLE,
+          "data": this.expenseTableData
+        }
       }
+      this._fileService.getPdf(data).pipe(
+        takeUntil(this._ngUnsubscribe.asObservable()))
+        .subscribe(blob => {
+          this._spinnerService.stopSpinner();
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = fileConfig.FILE_NAME;
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(url);
+          document.body.removeChild(a);
+        })
     }
-    this._fileService.getPdf(data).pipe(
-      takeUntil(this._ngUnsubscribe.asObservable()))
-      .subscribe(blob => {
-        this._spinnerService.stopSpinner();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileConfig.FILE_NAME;
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-  })
+    else{
+      this._snackBarService.setData(
+        {
+          message: htmlLabel['TEXT']['NO_EXPENSE_FOUND'],
+          time: snackBar.TIME.MIN,
+          type: snackBar.TYPE.ERROR
+        }
+      )
+    }
 
   }
 }

@@ -62,7 +62,8 @@ export interface DialogBox {
 export interface Modal {
     isAddCategory: boolean;
     isUpdateExepense: boolean;
-    data?: any
+    data?: any;
+    isImageUpload?: boolean;
 }
 
 export interface GetPDF {

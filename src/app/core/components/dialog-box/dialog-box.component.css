@@ -9,6 +9,7 @@
     left: 0;
     background-color: rgba(128, 122, 122, 0.3);
     font-size: 20px;
+    z-index: 1501;
 }
 
 .dialog-box{
@@ -39,4 +40,34 @@
 .edit-form{
     background-color: white;
     border-radius: 20px;
+}
+
+
+.img-view{
+    width: 250px;
+    height: 250px;
+    background-color: red;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+
+.more-dark{
+    background-color: rgba(73, 72, 72, 0.409);
+}
+
+.img-upload-container{
+    background-color: rgba(73, 72, 72, 0.609);;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.img-upload-input{
+    display: none;
+}
+
+.img-upload{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

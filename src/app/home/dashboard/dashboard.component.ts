@@ -6,6 +6,7 @@ import { ExpenseService } from 'src/app/core/services/expense.service';
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { RouteService } from 'src/app/core/services/route.service';
 import { routesConfig } from 'src/app/core/config/routes-config';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,7 +38,8 @@ export class DashboardComponent implements OnInit {
   public refreshData: BehaviorSubject<any> = new BehaviorSubject(null);
   constructor(
         private _expenseService: ExpenseService,
-        private _routeService: RouteService
+        private _routeService: RouteService,
+        private _router: Router
   ) { }
 
   ngOnInit(): void {
@@ -49,10 +51,15 @@ export class DashboardComponent implements OnInit {
         
         if(data && data.data){
           this.expenseDataFromAPI = data.data;
-          this.createPieChart(data.data, 'category');
-          this.createWeeklyGraph('bar', graphFilter[0].option);
-          this.expenseTableData.data = this._getRecentExpense(data);
-          this.refreshData.next(this._getRecentExpense(data));
+          if(this.expenseDataFromAPI.allExpenses.length){
+            this.expenseTableData.data = this._getRecentExpense(data);
+            this.refreshData.next(this._getRecentExpense(data));
+           
+            setTimeout(() => {
+              this.createPieChart(data.data, 'category');
+              this.createWeeklyGraph('bar', graphFilter[0].option);
+            }, 50)
+          }
         }
       });
    
@@ -182,6 +189,11 @@ export class DashboardComponent implements OnInit {
       yValues[chartConfig.X_AXIS.indexOf(exp.day)] = exp.amount;
     });
     return yValues;
+  }
+
+  public gotoAddExpense(){
+    this._routeService.setTitle(this._routeService.findRoute(routesConfig.ADD_EXPENSE));
+    this._router.navigate([routesConfig.HOME, routesConfig.ADD_EXPENSE]);
   }
 
 }
