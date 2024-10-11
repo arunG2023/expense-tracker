@@ -8,7 +8,7 @@ import { ExpenseService } from '../../services/expense.service';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { LoadingSpinnerService } from '../../services/loading-spinner.service';
 import { SnackbarService } from '../../services/snackbar.service';
-import { htmlLabel, messages, snackBar } from '../../config/common-config';
+import { fileConfig, htmlLabel, messages, snackBar } from '../../config/common-config';
 import { ModalService } from '../../services/modal.service';
 import { FormsModule } from '@angular/forms';
 import { AddExpenseFormComponent } from '../add-expense-form/add-expense-form.component';
@@ -164,15 +164,50 @@ export class DialogBoxComponent implements OnInit {
     let selectedFile = null;
     if(input.files && input.files.length > 0){
       selectedFile = input.files[0];
-      const formData = new FormData();
-      formData.append('file',selectedFile);
-      this._userService.uploadProfileImage(formData)
-        .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
-        .subscribe(res => {
-          console.log(res);
+      let isInvalidFile: string | boolean = this._isInvalidFile(selectedFile)
+      if(isInvalidFile){
+        this._snackBarService.setData({
+          message: isInvalidFile + "",
+          type: snackBar.TYPE.ERROR,
+          time: snackBar.TIME.MIN
         })
+      }
+      else{
+        const formData = new FormData();
+        formData.append('file',selectedFile);
+        this._userService.uploadProfileImage(formData)
+          .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
+          .subscribe((res: any) => {
+            if(res && res.message){
+              this._snackBarService.setData({
+                message: res.message,
+                type: (res.status == 200) ? snackBar.TYPE.SUCCESS : snackBar.TYPE.ERROR,
+                time: snackBar.TIME.MIN
+              })
+            }
+          })
+      }
+      
 
     }
+  }
+
+  private _isInvalidFile(file: File): string | boolean{
+      // Checking File Type:
+      let fileName: string = file.name;
+      let fileExtension: string = fileName.split(".")[1];
+      if(fileExtension && !fileConfig.ALLOWED_IMAGE_TYPES.includes(fileExtension.toLowerCase())){
+        return messages.ERROR.INVALID_IMAGE_TYPE;
+      }
+
+      // Checking File Size:
+      let kb = file.size / 1024;
+      let mb = kb / 1024;
+      if(mb && mb > fileConfig.ALOOWED_IMAGE_SIZE){
+        return messages.ERROR.ALLOWED_FILE_SIZE(fileConfig.ALOOWED_IMAGE_SIZE+"");
+      }
+
+      return false;
   }
 
 }

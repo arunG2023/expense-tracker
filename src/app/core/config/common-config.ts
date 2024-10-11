@@ -37,6 +37,8 @@ export const messages = {
         MODE_REQUIRED: "Mode is required",
         CATEGORY_REQUIRED: "Category is required",
         INVALID_FIELD: (field: string) => `${field} is invalid`,
+        INVALID_IMAGE_TYPE: "File should be of type jpg, jpeg or png",
+        ALLOWED_FILE_SIZE: (size: string) => `File size should be less than or equal to ${size}`
     },
     SUCCESS: {
         CATEGORY_ADDED: "Category added successfully",
@@ -182,5 +184,7 @@ export const errorPageConfig = {
 
 export const fileConfig = {
     FILE_NAME: "ExpenseData.pdf",
-    FILE_TITLE: "Expenses"
+    FILE_TITLE: "Expenses",
+    ALLOWED_IMAGE_TYPES: ["png", "jpg","jpeg"],
+    ALOOWED_IMAGE_SIZE: 10
 }
