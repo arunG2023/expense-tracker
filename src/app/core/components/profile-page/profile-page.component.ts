@@ -8,6 +8,9 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { SnackbarService } from '../../services/snackbar.service';
 import { EditUser } from '../../interfaces/interface';
 import { ModalService } from '../../services/modal.service';
+import { FileService } from '../../services/file.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { LoadingSpinnerService } from '../../services/loading-spinner.service';
 
 @Component({
   standalone: true,
@@ -32,18 +35,24 @@ export class ProfilePageComponent implements OnInit {
 
   public editField: string = "";
   public editedValue: string = "";
+  public profileImgSrc: SafeUrl | null = null;
 
   constructor(
       private _userService: UserService,
       private _snackBarService: SnackbarService,
-      private _modalService: ModalService
+      private _modalService: ModalService,
+      private _fileService: FileService,
+      private _spinnerService: LoadingSpinnerService
   ) { }
 
   ngOnInit(): void {
       this._getuserData();
+      this._getProfileImage();
+
   }
 
   private _getuserData(){
+    // this._spinnerService.startSpinner();
     this._userService.getUserProfileData()
       .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
       .subscribe((data: any) => {
@@ -51,6 +60,28 @@ export class ProfilePageComponent implements OnInit {
           this.userProfileData = data.data[0];
           this.userProfileDataCopy = {...this.userProfileData}
         }
+
+        if(data && data.isProfileExists){
+          let payload = {
+            "fileName": data.isProfileExists
+          }      
+          this._fileService.getUserProfileImage(payload)
+            .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
+            .subscribe((data: Blob) => {
+              this._fileService.sanitizeBlob(data);
+              // this._spinnerService.stopSpinner();
+            })
+        }
+        else{
+          // this._spinnerService.stopSpinner();
+        }
+      })
+  }
+
+  private _getProfileImage(){
+    this._fileService.profileImageUrl$.pipe(takeUntil(this._ngUnsubscribe.asObservable()))
+      .subscribe(url => {
+        this.profileImgSrc = url;
       })
   }
 

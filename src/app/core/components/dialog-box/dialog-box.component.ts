@@ -13,6 +13,8 @@ import { ModalService } from '../../services/modal.service';
 import { FormsModule } from '@angular/forms';
 import { AddExpenseFormComponent } from '../add-expense-form/add-expense-form.component';
 import { UserService } from '../../services/user.service';
+import { SafeUrl } from '@angular/platform-browser';
+import { FileService } from '../../services/file.service';
 
 @Component({
   selector: 'app-dialog-box',
@@ -42,13 +44,16 @@ export class DialogBoxComponent implements OnInit {
 
   public expenseData: any;
 
+  public profileImgSrc: SafeUrl | null = null;
+
   constructor(
     private _dialogService: DialogService,
     private _expenseService: ExpenseService,
     private _spinnerService: LoadingSpinnerService,
     private _snackBarService: SnackbarService,
     private _modalService: ModalService,
-    private _userService: UserService
+    private _userService: UserService,
+    private _fileService: FileService
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +69,14 @@ export class DialogBoxComponent implements OnInit {
           }
         })
     this._checkForModal();
+    this._getProfileImage();
+  }
+
+  private _getProfileImage(){
+    this._fileService.profileImageUrl$.pipe(takeUntil(this._ngUnsubscribe.asObservable()))
+      .subscribe(url => {
+        this.profileImgSrc = url;
+      })
   }
 
   private _checkForModal(){
@@ -173,6 +186,7 @@ export class DialogBoxComponent implements OnInit {
         })
       }
       else{
+        // this._spinnerService.startSpinner();
         const formData = new FormData();
         formData.append('file',selectedFile);
         this._userService.uploadProfileImage(formData)
@@ -184,6 +198,23 @@ export class DialogBoxComponent implements OnInit {
                 type: (res.status == 200) ? snackBar.TYPE.SUCCESS : snackBar.TYPE.ERROR,
                 time: snackBar.TIME.MIN
               })
+              
+              // Updating Image in Front End:
+              let fileName = res.fileName;
+
+              if(fileName){
+                this._fileService.getUserProfileImage({"fileName" : fileName})
+                  .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
+                  .subscribe((blob: Blob) => {
+                    this._fileService.sanitizeBlob(blob);
+                    // this._spinnerService.stopSpinner();
+                  })
+              }
+              else{
+                // this._spinnerService.stopSpinner();
+              }
+
+
             }
           })
       }
