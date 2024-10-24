@@ -24,10 +24,10 @@ export class ModalService {
     this.modalData.next(data);
   }
 
-  public hideModal(isAdded: boolean = false, categoryData: any = null){
+  public hideModal(isAdded: boolean = false, categoryData: any = null, hideOverflow: boolean = false){
     if(isAdded && categoryData) this.categoryOptions.next(categoryData)
     this.modalData.next(this.initialState);
-    document.body.classList.remove('body');
+    if(!hideOverflow) document.body.classList.remove('body');
   }
 
   constructor() { }

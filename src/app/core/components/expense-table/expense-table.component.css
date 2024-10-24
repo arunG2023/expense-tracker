@@ -59,6 +59,7 @@
     padding: 2px;
     border-radius: 50%;
     border: 2px solid var(--top-section-card-background);
+    cursor: pointer;
 }
 
 .download-icon:hover {

@@ -113,7 +113,7 @@ export class ExpenseTableComponent implements OnInit {
 
   // Getting Pdf Files:
   public getPdfFile() {
-    if (this.expenseTableData.length > 0) {
+    if (this.expenseTableData && this.expenseTableData.length > 0) {
       this._spinnerService.startSpinner();
       let data: GetPDF = {
         "type": "1",
