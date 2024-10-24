@@ -7,10 +7,35 @@ body{
     padding: 0;
     font-family: "Poppins", sans-serif;
     background-image: linear-gradient(to right, #b3f6f8c3, white);    
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-behavior:smooth;
 }
 
 .body {
     overflow: hidden;
+}
+
+body::-webkit-scrollbar,
+.table-section>div:nth-child(2)::-webkit-scrollbar{
+    width: 5px;
+    height: 5px;
+}
+
+body::-webkit-scrollbar-track,
+.table-section>div:nth-child(2)::-webkit-scrollbar-track{
+    background: #51505234;
+}
+
+body::-webkit-scrollbar-thumb,
+.table-section>div:nth-child(2)::-webkit-scrollbar-thumb{
+    background: rgb(93, 148, 243);
+    border-radius: 20px;
+}
+
+body::-webkit-scrollbar-thumb:hover,
+.table-section>div:nth-child(2)::-webkit-scrollbar-thumb:hover{
+    background: rgb(27, 103, 234);
 }
 
 

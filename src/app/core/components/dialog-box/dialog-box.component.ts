@@ -132,7 +132,12 @@ export class DialogBoxComponent implements OnInit {
 
   // Modal
   public closeModal(){
-    this._modalService.hideModal();
+    if(this.showUploadImage){
+      this._modalService.hideModal(false,null,true);
+    }
+    else{
+      this._modalService.hideModal();
+    }
     
   }
 
