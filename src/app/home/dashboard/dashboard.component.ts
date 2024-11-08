@@ -51,13 +51,17 @@ export class DashboardComponent implements OnInit {
         
         if(data && data.data){
           this.expenseDataFromAPI = data.data;
-          if(this.expenseDataFromAPI.allExpenses.length){
+          // Checking only the allExpense arr and not its length to accomodate no expenses
+          if(this.expenseDataFromAPI.allExpenses){
             this.expenseTableData.data = this._getRecentExpense(data);
             this.refreshData.next(this._getRecentExpense(data));
            
             setTimeout(() => {
-              this.createPieChart(data.data, 'category');
-              this.createWeeklyGraph('bar', graphFilter[0].option);
+              if(this.expenseDataFromAPI.allExpenses.length){
+                this.createPieChart(data.data, 'category');
+                this.createWeeklyGraph('bar', graphFilter[0].option);
+                
+              }
             }, 50)
           }
         }

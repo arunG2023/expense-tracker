@@ -31,7 +31,8 @@ export class ListExpenseComponent implements OnInit {
     this._expenseService.getExpenseData()
     .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
     .subscribe(expenseData => {
-      if(expenseData && expenseData.data.allExpenses.length > 0){
+       // Checking only the allExpense arr and not its length to accomodate no expenses
+      if(expenseData && expenseData.data.allExpenses){
         this.expenseTableData.data = expenseData.data.allExpenses;
         this.refreshData.next(expenseData.data.allExpenses);
       }
