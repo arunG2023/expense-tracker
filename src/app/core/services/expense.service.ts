@@ -57,4 +57,10 @@ export class ExpenseService {
   public editExpense(data: any): Observable<any> {
     return this._http.put(apiUrl.UPDATE_EXPENSE, data);
   }
+
+  public sortExpenseByDateDesc(expenses: any){
+    expenses.sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    // console.log(data);
+    return expenses;
+  }
 } 

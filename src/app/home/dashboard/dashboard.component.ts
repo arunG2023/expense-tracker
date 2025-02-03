@@ -70,8 +70,10 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  private _getRecentExpense(data: any){
-    return data.data.allExpenses.slice(data.data.allExpenses.length - 10, data.data.allExpenses.length).reverse()
+  private _getRecentExpense(data: any) {
+    // Shallow copying object to sort only this copy
+    let expenses = Object.assign([],data.data.allExpenses);
+    return this._expenseService.sortExpenseByDateDesc(expenses).slice(0, 5);
   }
 
   ngOnDestroy(): void{
@@ -92,15 +94,24 @@ export class DashboardComponent implements OnInit {
 
     // Will be from API:
     let yValues: any[] = [];
+    let xValues: any[] = chartConfig.X_AXIS;
 
     if(filter == graphFilter[0].option){
       if(this.expenseDataFromAPI && this.expenseDataFromAPI.currentWeekExpenses && this.expenseDataFromAPI.currentWeekExpenses.graphData.length){
+          xValues = chartConfig.X_AXIS;
           yValues = this._buildWeekData(this.expenseDataFromAPI.currentWeekExpenses.graphData)
       }
     }
-    else{
+    else if (filter == graphFilter[1].option) {
       if(this.expenseDataFromAPI && this.expenseDataFromAPI.previousWeekExpenses && this.expenseDataFromAPI.previousWeekExpenses.graphData.length){
+          xValues = chartConfig.X_AXIS;
           yValues = this._buildWeekData(this.expenseDataFromAPI.previousWeekExpenses.graphData);
+      }
+    }
+    else {
+      if(this.expenseDataFromAPI && this.expenseDataFromAPI.monthlyExpenses && this.expenseDataFromAPI.monthlyExpenses.length){
+        xValues = chartConfig.X_AXIS_MONTH;
+        yValues = this._buildMonthData(this.expenseDataFromAPI.monthlyExpenses);
       }
     }
 
@@ -110,7 +121,7 @@ export class DashboardComponent implements OnInit {
       type: chartType,
       data: {
         // values on X-Axis
-        labels: chartConfig.X_AXIS,
+        labels: xValues,
       
 	       datasets: [
           {
@@ -191,6 +202,14 @@ export class DashboardComponent implements OnInit {
     const yValues: number[] = [0,0,0,0,0,0,0];
     data.forEach((exp:any) => {
       yValues[chartConfig.X_AXIS.indexOf(exp.day)] = exp.amount;
+    });
+    return yValues;
+  }
+
+  private _buildMonthData(data: any){
+    const yValues: number[] = [0,0,0,0,0,0,0,0,0,0,0,0];
+    data.forEach((exp:any) => {
+      yValues[chartConfig.X_AXIS_MONTH.indexOf(exp.month)] = exp.amount;
     });
     return yValues;
   }
