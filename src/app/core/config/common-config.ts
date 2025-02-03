@@ -135,6 +135,9 @@ export const graphFilter = [
     },
     {
         option: "Last Week"
+    },
+    {
+        option: "Monthly"
     }
 ];
 
@@ -144,6 +147,7 @@ export const chartConfig = {
     BAR_COLOR: "#6366f1",
     BAR_LABEL: "Expense",
     X_AXIS: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat","Sun"],
+    X_AXIS_MONTH: ["Jan", "Feb", "Mar", "Apr", "May" , "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 }
 

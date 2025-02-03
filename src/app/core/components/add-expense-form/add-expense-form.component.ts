@@ -99,7 +99,8 @@ export class AddExpenseFormComponent implements OnInit {
           // console.log(data);
           this.categoryOption = data;
           this.hover2();
-          this.onCategorySelect(data[data.length - 1].category)
+          this.onCategorySelect(data[data.length - 1].category);
+          this._modalService.categoryOptions.next(null);
         }
       })
   }

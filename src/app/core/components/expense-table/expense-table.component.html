@@ -47,7 +47,7 @@
           <div>{{ htmlLabel['TEXT']['NO_EXPENSE_FOUND'] }}</div>
         </td>
       </tr>
-      <tr>
+      <tr *ngIf="inputData.limit > 5">
         <td colspan="6" class="pagination-control text-small" >
           <pagination-controls  (pageChange)="pageChanged($event)" ></pagination-controls>
          </td>
