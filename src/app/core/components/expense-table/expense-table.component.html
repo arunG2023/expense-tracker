@@ -24,17 +24,17 @@
       <tr class="text-small weight-600 table-header">
         <td>{{htmlLabel['TABLE']["EXPENSE"]}}</td>
         <td>{{htmlLabel['TABLE']["CATEGORY"]}}</td>
-        <td>{{htmlLabel['TABLE']["AMOUNT"]}}</td>
         <td>{{htmlLabel['TABLE']["MODE"]}}</td>
         <td>{{htmlLabel['TABLE']["DATE"]}}</td>
+        <td>{{htmlLabel['TABLE']["AMOUNT"]}}</td>
         <td>{{htmlLabel['TABLE']["ACTION"]}}</td>
       </tr>
       <tr class="text-small" *ngFor="let expense of expenseTableData | paginate: { itemsPerPage: inputData.limit , currentPage: page } ">
         <td><span class="tool-tip" [title]="expense.name">{{expense.name | truncateString}}</span></td>
         <td>{{expense.category}}</td>
-        <td>&#8377; {{expense.amount}}</td>
         <td>{{expense.mode}}</td>
         <td>{{expense.date}}</td>
+        <td>&#8377; {{expense.amount}}</td>
         <td>
           <div class="action">
             <img (click)="editExpense(expense)" class="pointer" src="../../../../assets/icons/edit.png" alt="">
@@ -47,6 +47,12 @@
           <div>{{ htmlLabel['TEXT']['NO_EXPENSE_FOUND'] }}</div>
         </td>
       </tr>
+
+      <tr class="table-footer" *ngIf="isFilteredExpense">
+        <td class="text-center" colspan="4">Total</td>
+        <td class="limit-name" colspan="2">&#8377; {{ expenseTotalAmount }}</td>
+      </tr>
+
       <tr *ngIf="inputData.limit > 5">
         <td colspan="6" class="pagination-control text-small" >
           <pagination-controls  (pageChange)="pageChanged($event)" ></pagination-controls>

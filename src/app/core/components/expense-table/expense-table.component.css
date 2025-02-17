@@ -96,7 +96,7 @@
     min-width: 150px;
 }
 
-.expense-table>.table-header {
+.expense-table>.table-header, .table-footer {
     background-color: var(--table-header-background-color);
 }
 
