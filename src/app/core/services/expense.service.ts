@@ -63,4 +63,17 @@ export class ExpenseService {
     // console.log(data);
     return expenses;
   }
+
+  // Methods to calculate expense amounts
+  public calculateTotal(expenseArr : any[]): string{
+    let total = 0;
+    if(expenseArr && expenseArr.length){
+        expenseArr.forEach(exp => total += parseFloat(exp.amount));
+    }
+    return this.roundAmountToTwoDecimals(total);
+  }
+
+  public roundAmountToTwoDecimals(amount : any): string{
+    return parseFloat(amount).toFixed(2);
+  }
 } 

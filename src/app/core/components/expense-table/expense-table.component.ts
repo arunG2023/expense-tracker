@@ -47,6 +47,10 @@ export class ExpenseTableComponent implements OnInit {
 
   public expenseTableData: any[] = [];
 
+  // Show expense total footer for filtered expenses.
+  public expenseTotalAmount: string = '0';
+  public isFilteredExpense: boolean = false;
+
   constructor(
     private _dialogService: DialogService,
     private _expenseSerice: ExpenseService,
@@ -60,11 +64,16 @@ export class ExpenseTableComponent implements OnInit {
     this.expenseTableData = this.inputData.data;
 
     this.refreshData.pipe(takeUntil(this._ngUnsubscribe.asObservable()))
-      .subscribe(data => this.expenseTableData = data);
+      .subscribe(data => {
+        this.expenseTableData = data;
+        this.expenseTotalAmount =  this._expenseSerice.calculateTotal(this.expenseTableData);
+      });
   }
 
   public filterTable(searchText: string) {
     if (searchText && searchText.length > 0) {
+      this.isFilteredExpense = true;
+      this.pageChanged(1);
       this.expenseTableData = this.inputData.data.filter((expense): boolean | undefined => {
         if (this.inputData.data.length > 0) {
           for (const key in expense) {
@@ -80,8 +89,10 @@ export class ExpenseTableComponent implements OnInit {
       })
     }
     else {
+      this.isFilteredExpense = false;
       this.expenseTableData = this.inputData.data
     }
+    this.expenseTotalAmount =  this._expenseSerice.calculateTotal(this.expenseTableData);
   }
 
 
