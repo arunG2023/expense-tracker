@@ -221,7 +221,16 @@ export class DialogBoxComponent implements OnInit {
 
 
             }
-          })
+          },
+        (err) => {
+          if(err.error.message){
+            this._snackBarService.setData({
+              message: err.error.message,
+              type: snackBar.TYPE.ERROR,
+              time: 5
+            });
+          }
+        })
       }
       
 
