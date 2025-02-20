@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseAPIUrl: "http://localhost:4010", 
+  baseAPIUrl: "http://localhost/Personal_Expense_Tracker", 
 };
 
 /*

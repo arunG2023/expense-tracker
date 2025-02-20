@@ -30,7 +30,9 @@ export class ProfileBarComponent implements OnInit {
     this._userService.getUserProfileData()
       .pipe(takeUntil(this._ngUnsubscribe.asObservable()))
       .subscribe(data => {
+        console.log(data);
         data = data.data[0];
+
         this._setUserData(data);
       })
 
