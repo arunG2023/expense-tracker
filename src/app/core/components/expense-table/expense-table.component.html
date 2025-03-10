@@ -25,7 +25,10 @@
         <td>{{htmlLabel['TABLE']["EXPENSE"]}}</td>
         <td>{{htmlLabel['TABLE']["CATEGORY"]}}</td>
         <td>{{htmlLabel['TABLE']["MODE"]}}</td>
-        <td>{{htmlLabel['TABLE']["DATE"]}}</td>
+        <td (click)="sortByDate(sortedByDateAsc)" class="justify-space-between" >
+          {{htmlLabel['TABLE']["DATE"]}}
+          <span [ngClass]="(sortedByDateAsc) ? 'text-medium weight-600 arrow' : ''" >&uarr;</span>
+          <span [ngClass]="(!sortedByDateAsc) ? 'text-medium weight-600 arrow' : ''">&darr;</span></td>
         <td>{{htmlLabel['TABLE']["AMOUNT"]}}</td>
         <td>{{htmlLabel['TABLE']["ACTION"]}}</td>
       </tr>

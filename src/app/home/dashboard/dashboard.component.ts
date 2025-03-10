@@ -192,8 +192,12 @@ export class DashboardComponent implements OnInit {
         ]
       },
       options: {
-        
-      }
+        plugins: {
+          legend: {
+            display: false
+          },
+        }
+    }
     });
   }
 

@@ -64,6 +64,12 @@ export class ExpenseService {
     return expenses;
   }
 
+  public sortExpenseByDateAsc(expenses: any){
+    expenses.sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    // console.log(data);
+    return expenses;
+  }
+
   // Methods to calculate expense amounts
   public calculateTotal(expenseArr : any[]): string{
     let total = 0;

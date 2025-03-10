@@ -156,3 +156,7 @@
 .pagination-control > div {
     margin-left: 24px;
 }
+
+.arrow{
+    color: blue;
+}

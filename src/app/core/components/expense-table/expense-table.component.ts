@@ -35,6 +35,9 @@ export class ExpenseTableComponent implements OnInit {
   // Subject to destroy
   private _ngUnsubscribe: Subject<void> = new Subject();
 
+  // Sort By Date:
+  public sortedByDateAsc: boolean = true
+
   @Input() inputData: ExpenseTableData = {
     title: htmlLabel.TEXT.APPLICATION_NAME,
     limit: 1,
@@ -157,6 +160,17 @@ export class ExpenseTableComponent implements OnInit {
       )
     }
 
+  }
+
+  // Sort By Date based on condition
+  public sortByDate(condition : boolean){
+    this.sortedByDateAsc = !condition;
+    if(condition){
+      this.expenseTableData =  this._expenseSerice.sortExpenseByDateDesc(this.expenseTableData)
+    }
+    else{
+      this.expenseTableData = this._expenseSerice.sortExpenseByDateAsc(this.expenseTableData);
+    }
   }
 }
 
